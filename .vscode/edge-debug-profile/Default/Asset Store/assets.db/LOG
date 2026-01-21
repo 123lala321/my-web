@@ -1,5 +1,3 @@
-2026/01/20-12:15:48.735 7694 Reusing MANIFEST D:\Shang\vs\code\.vscode\edge-debug-profile\Default\Asset Store\assets.db/MANIFEST-000001
-2026/01/20-12:15:48.743 7694 Recovering log #3
-2026/01/20-12:15:48.747 7694 Level-0 table #3: started
-2026/01/20-12:15:48.761 7694 Level-0 table #3: 346703 bytes OK
-2026/01/20-12:15:48.769 7694 Delete type=0 #3
+2026/01/21-12:41:17.910 79ac Reusing MANIFEST D:\Shang\vs\code\.vscode\edge-debug-profile\Default\Asset Store\assets.db/MANIFEST-000001
+2026/01/21-12:41:17.920 79ac Recovering log #4
+2026/01/21-12:41:17.922 79ac Reusing old log D:\Shang\vs\code\.vscode\edge-debug-profile\Default\Asset Store\assets.db/000004.log 

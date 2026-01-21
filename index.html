@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>源梦双碳·点亮深港实践支队</title>
+    <style>
+        :root {
+            --primary-blue: #0052cc;
+            --accent-green: #00b894;
+            --bg-color: #fcfcfc;
+            --card-bg: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            background-color: var(--bg-color);
+            color: #2d3436;
+            line-height: 1.6;
+        }
+
+        /* 顶部导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            border-left: 4px solid var(--accent-green);
+            padding-left: 12px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+
+        nav li {
+            padding: 8px 18px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: 0.3s;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        nav li:hover { background: #f0f0f0; }
+        nav li.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* 主体内容容器 */
+        main {
+            margin-top: 70px; /* 避开导航栏 */
+            min-height: calc(100vh - 70px);
+            padding: 40px 10%;
+        }
+
+        .content-section {
+            display: none; /* 默认隐藏所有板块 */
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 模块样式 */
+        .section-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .section-header h1 {
+            font-size: 2.2rem;
+            color: #1e272e;
+        }
+
+        .section-header .line {
+            width: 60px;
+            height: 4px;
+            background: var(--accent-green);
+            margin: 10px auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        /* 首页大图显示 - 强化点亮深港元素 */
+        .hero-banner {
+            height: 450px;
+            background: linear-gradient(135deg, #022b6b 0%, #0984e3 50%, #00b894 100%);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 82, 204, 0.2);
+        }
+
+        .hero-banner .prefix {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+            text-transform: uppercase;
+        }
+
+        .hero-banner .main-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-banner .sub-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            background: rgba(255,255,255,0.15);
+            padding: 5px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #b2bec3;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">源梦双碳 · 先导计划</div>
+        <nav>
+            <ul>
+                <li class="active" onclick="showSection(event, 'home')">首页</li>
+                <li onclick="showSection(event, 'intro')">实践简介</li>
+                <li onclick="showSection(event, 'members')">成员介绍</li>
+                <li onclick="showSection(event, 'results')">调研成果</li>
+                <li onclick="showSection(event, 'gallery')">影像合集</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="content-section active">
+            <div class="hero-banner">
+                <div class="prefix">“源梦双碳·先导计划”</div>
+                <h1 class="main-title">点亮深港</h1>
+                <p class="sub-title">赴深圳香港电力发展调研支队</p>
+            </div>
+            
+            <div style="margin-top: 30px;" class="card">
+                <h2>最新公告</h2>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                <p>本支队已完成前期文献综述，即将开启实地考察。我们将深入调研两地电网互联机制，探索碳中和背景下的新型电力系统建设。</p>
+            </div>
+        </section>
+
+        <section id="intro" class="content-section">
+            <div class="section-header">
+                <h1>实践简介</h1>
+                <div class="line"></div>
+            </div>
+            <div class="card">
+                <h3>实践目标</h3>
+                <p>探索大湾区在迈向“双碳”目标过程中的电力技术路径，特别是深港两地在电网互联、可再生能源并网及电力交易机制上的差异与互补。</p>
+            </div>
+        </section>
+
+        <section id="members" class="content-section">
+            <div class="section-header">
+                <h1>成员介绍</h1>
+                <div class="line"></div>
+            </div>
+            <div class="grid">
+                <div class="card" style="text-align: center;">
+                    <div style="width:70px; height:70px; background:#e0e0e0; border-radius:50%; margin:0 auto 15px;"></div>
+                    <h4>队员姓名</h4>
+                    <p style="color: #636e72;">电机系 20XX 级</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="results" class="content-section">
+            <div class="section-header">
+                <h1>调研成果</h1>
+                <div class="line"></div>
+            </div>
+            <div class="card">
+                <p>内容填充中，敬请期待...</p>
+            </div>
+        </section>
+
+        <section id="gallery" class="content-section">
+            <div class="section-header">
+                <h1>影像合集</h1>
+                <div class="line"></div>
+            </div>
+            <div class="grid">
+                <div class="card" style="height:200px; background:#f1f2f6; display:flex; align-items:center; justify-content:center; color:#999;">影像占位</div>
+                <div class="card" style="height:200px; background:#f1f2f6; display:flex; align-items:center; justify-content:center; color:#999;">影像占位</div>
+            </div>
+        </section>
+
+        <footer>
+            &copy; 2026 源梦双碳 · 点亮深港实践支队 | 电机系
+        </footer>
+    </main>
+
+    <script>
+        function showSection(event, sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.classList.remove('active'));
+
+            const navItems = document.querySelectorAll('nav li');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>

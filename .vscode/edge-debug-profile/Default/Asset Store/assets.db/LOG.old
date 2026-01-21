@@ -1,2 +1,5 @@
-2026/01/20-12:15:21.650 7384 Creating DB D:\Shang\vs\code\.vscode\edge-debug-profile\Default\Asset Store\assets.db since it was missing.
-2026/01/20-12:15:21.696 7384 Reusing MANIFEST D:\Shang\vs\code\.vscode\edge-debug-profile\Default\Asset Store\assets.db/MANIFEST-000001
+2026/01/20-12:15:48.735 7694 Reusing MANIFEST D:\Shang\vs\code\.vscode\edge-debug-profile\Default\Asset Store\assets.db/MANIFEST-000001
+2026/01/20-12:15:48.743 7694 Recovering log #3
+2026/01/20-12:15:48.747 7694 Level-0 table #3: started
+2026/01/20-12:15:48.761 7694 Level-0 table #3: 346703 bytes OK
+2026/01/20-12:15:48.769 7694 Delete type=0 #3
