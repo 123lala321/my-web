@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "使用 Edge 独立窗口调试",
+            "type": "msedge",
+            "request": "launch",
+            "file": "${file}",
+            "userDataDir": "${workspaceFolder}/.vscode/edge-debug-profile"
+        }
+    ]
+}
