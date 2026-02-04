@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>源梦双碳·点亮深港实践支队</title>
+    <style>
+        :root {
+            --primary-blue: #0052cc;
+            --accent-green: #00b894;
+            /* 背景稍微灰一点点，让白卡片更突出 */
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: '-apple-system', 'BlinkMacSystemFont', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #2d3436;
+            line-height: 1.6;
+            /* 优化文字渲染，使其在深色背景下更清晰 */
+            -webkit-font-smoothing: antialiased;
+            /* 让 Body 变成弹性盒子，撑满全屏 */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 顶部导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.9);
+            /* 增强毛玻璃效果 */
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            height: 50px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+
+        nav li {
+            padding: 8px 20px;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #636e72;
+        }
+
+        nav li:hover {
+            background: rgba(0, 82, 204, 0.05);
+            color: var(--primary-blue);
+        }
+
+        nav li.active {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            nav ul { gap: 2px; }
+            nav li { padding: 6px 12px; font-size: 0.85rem; }
+        }
+
+        /* 主体内容容器 */
+        main {
+            margin-top: 70px;
+            /* 让 main 自动占据剩余空间，把 footer 挤到底部 */
+            flex: 1;
+            width: 100%;
+            padding: 40px 8%;
+        }
+
+        .content-section {
+            display: none;
+            /* 更平滑的上浮动画 */
+            animation: slideUpSmooth 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes slideUpSmooth {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* 模块通用样式 */
+        .section-header {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e272e;
+            letter-spacing: -1px;
+        }
+
+        .section-header .line {
+            width: 80px;
+            height: 5px;
+            /* 渐变线条 */
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-green));
+            margin: 15px auto;
+            border-radius: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            /* 更深邃、柔和的阴影，增加立体感 */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0,0,0,0.02);
+            margin-bottom: 30px;
+        }
+
+        /* 首页大图 */
+        .hero-banner-container {
+            position: relative;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 82, 204, 0.25);
+        }
+
+        .hero-real-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: scale(1.02); /* 轻微放大，避免边缘漏光 */
+        }
+
+        .hero-content-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 40px;
+            /* 更丰富的渐变遮罩 */
+            background: linear-gradient(to bottom, rgba(0,20,60,0.1) 0%, rgba(0, 30, 90, 0.6) 100%);
+        }
+
+        .hero-content-overlay .prefix {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 35px;
+            border-radius: 50px;
+            color: #fff;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero-content-overlay .main-title {
+            font-size: 7rem;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1;
+            letter-spacing: 10px;
+            text-indent: 10px;
+            color: #ffffff;
+            /* 文字光晕效果 */
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2), 0 0 50px rgba(0, 82, 204, 0.5);
+        }
+
+        .hero-content-overlay .sub-title {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        @media (max-width: 600px) {
+            .hero-content-overlay .main-title { font-size: 3.5rem; letter-spacing: 4px; text-indent: 4px; }
+            .hero-content-overlay .prefix { font-size: 1rem; padding: 8px 20px; margin-bottom: 15px; letter-spacing: 1px;}
+            .hero-content-overlay .sub-title { font-size: 1.2rem; letter-spacing: 3px; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* === 成员介绍板块专用样式 (V4: 流光科技风格) === */
+        .group-header {
+            margin: 70px 0 30px 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #2d3436;
+        }
+        /* 标题前的装饰竖条改成渐变光标 */
+        .group-header::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 35px;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--accent-green));
+            margin-right: 15px;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(0, 82, 204, 0.3);
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .member-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            /* 初始阴影：深邃且柔和，让卡片浮起来 */
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.07), 0 5px 15px -5px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 更有弹性的动画曲线 */
+            display: flex;
+            flex-direction: row;
+            min-height: 200px;
+            border: 1px solid rgba(255,255,255,0.8); /* 微妙的边框增加质感 */
+        }
+
+        /* 核心交互：悬停时的炫酷光晕 */
+        .member-card:hover {
+            transform: translateY(-8px) scale(1.01); /* 上浮并轻微放大 */
+            /* 重点：带有颜色的扩散光晕阴影 */
+            box-shadow: 0 30px 60px -15px rgba(0, 82, 204, 0.25), 0 10px 20px -10px rgba(0, 82, 204, 0.1);
+        }
+
+        .member-photo-box {
+            width: 180px;
+            min-width: 180px;
+            background-color: #f0f2f5;
+            position: relative;
+            overflow: hidden;
+            /* 给照片框加一个内阴影，增加嵌入感 */
+            box-shadow: inset -5px 0 15px -5px rgba(0,0,0,0.1);
+        }
+
+        .member-photo-box img {
+            width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .member-card:hover .member-photo-box img {
+            transform: scale(1.08); /* 悬停时照片缓慢放大 */
+        }
+
+        /* === 核心美化：文字区域的流光渐变 === */
+        .member-info {
+            padding: 30px 35px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            
+            /* V4重点：更现代、多层次的对角线渐变背景 (白 -> 极淡蓝 -> 柔和蓝) */
+            background: linear-gradient(135deg, #ffffff 0%, #f4f9ff 50%, #e8f2ff 100%);
+            /* 顶部加一道高光，增加玻璃质感 */
+            border-top: 1px solid rgba(255,255,255,0.9);
+        }
+        
+        /* 悬停时，渐变背景流动加深 */
+        .member-card:hover .member-info {
+            background: linear-gradient(135deg, #ffffff 0%, #edf6ff 50%, #ddeeff 100%);
+        }
+
+        .member-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            /* 炫酷分割线：从蓝到透明的渐变光带 */
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(to right, rgba(0,82,204,0.15), transparent) 1;
+            position: relative;
+        }
+
+        .member-name { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: #2d3436; 
+            letter-spacing: -0.5px;
+        }
+
+        .role-badge {
+            font-size: 0.8rem; 
+            padding: 6px 14px; 
+            border-radius: 8px; /* 现代微圆角 */
+            font-weight: 700; 
+            color: #fff; 
+            background-color: #b2bec3; 
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            /* 徽章也加一点光晕 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .role-teacher { background: linear-gradient(135deg, #6c5ce7, #8e7cf7); box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);}
+        .role-captain { background: linear-gradient(135deg, #d63031, #ff5e57); box-shadow: 0 4px 12px rgba(214, 48, 49, 0.3);}
+        .role-vice { background: linear-gradient(135deg, #e17055, #ff9f43); box-shadow: 0 4px 12px rgba(225, 112, 85, 0.3);}
+        .role-member { display: none; }
+
+        .member-desc {
+            font-size: 1rem;
+            color: #556; /* 颜色更深一点，提高对比度 */
+            line-height: 1.7;
+            text-align: justify;
+            font-weight: 400;
+        }
+
+        /* 针对手机屏幕的适配 */
+        @media (max-width: 600px) {
+            .member-grid { grid-template-columns: 1fr; gap: 25px; }
+            .member-card { flex-direction: column; min-height: auto; }
+            /* 手机端固定照片高度为 240px */
+            .member-photo-box { width: 100%; height: 240px; box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,0.1); }
+            .member-info { padding: 25px; background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); }
+            .member-card:hover { transform: translateY(-5px); }
+
+            /* === 新增：针对特定人物在手机端的头像调整 === */
+            /* 让带有这个类的图片在手机上强制以顶部对齐，显示头部 */
+            /* 使用 !important 确保覆盖掉默认的居中对齐设置 */
+            .member-photo-box img.special-crop-top {
+                object-position: top center !important;
+            }
+        }
+
+        /* === 推送合集样式 (修改版：宽幅封面适配，双列排布) === */
+        .articles-grid {
+            display: grid;
+            /* 关键修改 1：大幅增加卡片最小宽度。
+               设为 420px，这样在绝大多数屏幕上会强制排布为 2 列（一行两个）。
+               卡片会非常宽敞，适合展示风景/宽幅封面。 */
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            gap: 35px;
+        }
+
+        /* 关键修改：将 div 改为 a 标签，让整个卡片可点击 */
+        .article-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.03);
+            height: 100%;
+            /* 核心：去除链接的默认样式 */
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -15px rgba(0, 82, 204, 0.2);
+        }
+
+        .article-cover {
+            /* 关键修改 2：大幅增加图片容器高度。
+               改为 260px，配合 420px+ 的宽度，形成一个接近 16:9 的舒适宽幅比例。 */
+            height: 260px;
+            background-color: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-cover img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+        .article-card:hover .article-cover img { transform: scale(1.05); }
+
+        .article-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom, #fff, #fdfdfd);
+        }
+
+        .article-meta {
+            font-size: 0.9rem; color: #888; margin-bottom: 0; display: flex; align-items: center; font-weight: 500;
+        }
+        .article-meta::before {
+            content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px rgba(0, 184, 148, 0.4);
+        }
+
+        /* 针对手机屏幕的适配，让宽卡片在手机上也能单列对齐 */
+        @media (max-width: 600px) {
+             .articles-grid { grid-template-columns: 1fr; }
+             
+             /* === 核心修复：防止封面图比例变化 === */
+             .article-cover { 
+                 /* 1. 取消固定高度，改为自动，让高度跟随宽度和比例变化 */
+                 height: auto !important;
+                 
+                 /* 2. 设定一个标准的宽屏比例 (16:9)，保证图片框架稳定 
+                    如果你的图片本身不是16:9，浏览器会按 16:9 裁剪；
+                    如果你想完全完全由图片撑开，可以删掉 aspect-ratio 这行 */
+                 aspect-ratio: 16 / 9; 
+             } 
+             
+             .article-cover img {
+                 /* 3. 让图片高度也自动适应，不再强制拉伸 */
+                 height: 100%; 
+                 width: 100%;
+                 object-fit: cover; /* 保持填充，但因为比例已锁定，不会变形 */
+             }
+             
+             /* 首页大图在手机上限制最大高度 */
+             .hero-banner-container { max-height: 260px; }
+        }
+        
+        footer {
+            text-align: center; 
+            padding: 40px 20px; 
+            color: #b2bec3; 
+            font-size: 0.9rem; 
+            font-weight: 500;
+            width: 100%;
+            margin-top: auto; /* 配合 flex-direction: column 实现 sticky footer */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="image_0.png" alt="队徽" class="logo-icon">
+            点亮深港
+        </div>
+        <nav>
+            <ul>
+                <li class="active" onclick="showSection(event, 'home')">首页</li>
+                <li onclick="showSection(event, 'intro')">实践简介</li>
+                <li onclick="showSection(event, 'members')">成员介绍</li>
+                <li onclick="showSection(event, 'articles')">推送合集</li>
+                <li onclick="showSection(event, 'gallery')">影像合集</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="content-section active">
+            <div class="hero-banner-container">
+                <img src="image_2.png" alt="点亮深港背景" class="hero-real-image">
+                <div class="hero-content-overlay">
+                    <div class="prefix">“源梦双碳·先导计划”</div>
+                    <h1 class="main-title">点亮深港</h1>
+                    <p class="sub-title">赴深圳、香港实践支队</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;" class="card">
+                <h2 style="font-weight: 800; letter-spacing: -0.5px;">最新公告</h2>
+                <hr style="margin: 20px 0; border: 0; height: 1px; background: rgba(0,0,0,0.05);">
+                <p style="font-size: 1.05rem;">本支队已完成前期文献综述，即将开启实地考察。我们将深入调研两地电网互联机制，探索碳中和背景下的新型电力系统建设。</p>
+            </div>
+        </section>
+
+        <section id="intro" class="content-section">
+            <div class="section-header">
+                <h1>实践简介</h1>
+                <div class="line"></div>
+            </div>
+            <div class="card">
+                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 15px;">实践目标</h3>
+                <p style="font-size: 1.05rem;">探索大湾区在迈向“双碳”目标过程中的电力技术路径，特别是深港两地在电网互联、可再生能源并网及电力交易机制上的差异与互补。</p>
+            </div>
+        </section>
+
+        <section id="members" class="content-section">
+            <div class="section-header">
+                <h1>成员介绍</h1>
+                <div class="line"></div>
+                <p style="color: #666; max-width: 650px; margin: 0 auto; font-size: 1.1rem;">
+                    源梦双碳·点亮深港实践支队由来自电机系、未央书院、自强书院的16名师生组成，我们将怀揣梦想，用足迹丈量大湾区电网的脉络。
+                </p>
+            </div>
+
+            <div class="group-header">🚩 领队与指导</div>
+            <div class="member-grid">
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="xiangziyun.png" alt="辅导员"></div>
+                    <div class="member-info">
+                        <div class="member-header">
+                            <span class="member-name">项梓纭</span>
+                            <span class="role-badge role-teacher">带队辅导员</span>
+                        </div>
+                        <div class="member-desc">
+                            大家好，我叫项梓纭，来自电机系电硕52班。很荣幸担任本次实践的带队辅导员，希望在接下来的几天里跟大家一起圆满完成本次实践活动，也希望大家在本次实践中都能有所收获！
+                        </div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="wangjingxian.png" alt="支队长"></div>
+                    <div class="member-info">
+                        <div class="member-header">
+                            <span class="member-name">王婧贤</span>
+                            <span class="role-badge role-captain">支队长</span>
+                        </div>
+                        <div class="member-desc">
+                            大家好，我是本次实践的支队长王婧贤。非常荣幸能够带队前往深圳和香港进行调研学习，希望能给大家带来一次满意的实践体验！
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group-header research">⚡ 调研组</div>
+            <div class="member-grid">
+                <div class="member-card">
+                    <div class="member-photo-box">
+                        <img src="liangjinpeng.png" alt="副支队长" style="object-position: top center;">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-header">
+                            <span class="member-name">梁锦鹏</span>
+                            <span class="role-badge role-vice">调研副支队长</span>
+                        </div>
+                        <div class="member-desc">大家好！我是来自电35的梁锦鹏，非常高兴能够和大家同行实践，期待和大家一同增长见闻、开拓视野，谢谢～</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box">
+                         <img src="zhengjiheng.png" alt="队员" style="object-position: top center;">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">郑霁恒</span></div>
+                        <div class="member-desc">我是来自电45的郑霁恒，在本次实践中担任调研工作～我喜欢电影、音乐，也有（正在开发🤔）微量二次元属性，期待与大家同行！😉</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="chenbaiyuan.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">陈柏源</span></div>
+                        <div class="member-desc">来自电45，山东烟台人，喜欢和大家一起实践长见识~</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="yanxiaoyu.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">闫晓雨</span></div>
+                        <div class="member-desc">
+                            我是来自电机系电32班的闫晓雨，喜欢美食，在这次实践中担任调研组的工作，这是我第一次去广东和香港，衷心期待这次美好的旅程，希望能和大家相处愉快！</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="xutianrui.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">徐天瑞</span></div>
+                        <div class="member-desc">大家好！我是调研组的徐天瑞，来自电2年级。香江探绿能，港岛践知行，期待可以和大家一起，在大湾区吃好玩好，把我们的实践故事写好讲好！</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group-header publicity">📷 宣传组</div>
+            <div class="member-grid">
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="chenboxi.png" alt="副支队长"></div>
+                    <div class="member-info">
+                        <div class="member-header">
+                            <span class="member-name">陈泊熹</span>
+                            <span class="role-badge role-vice">宣传副支队长</span>
+                        </div>
+                        <div class="member-desc">
+                            大家好，我是电35班的陈泊熹，来自福建泉州，很荣幸成为“点亮深港”支队的宣传副支队长。喜欢摄影锻炼听歌唱歌喝茶睡觉。轻至中度社恐，有时候很P的INFJ，希望能在实践中和大家成为好朋友，也欢迎大家多多督促我干活（
+                        </div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="qiuhengjun.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">邱恒骏</span></div>
+                        <div class="member-desc">
+                            大家好，我是宣传组的邱恒骏。我喜欢听歌、唱歌、摄影、跑步。希望能在本次实践收获友谊和更多来自业界和学界对电力的认识～（主线是帮大家都拍出美美的照片）</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="shangtianyi.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">尚天怡</span></div>
+                        <div class="member-desc">大家好，我是来自未央-电41的尚天怡，平时喜欢听音乐、弹钢琴。很荣幸成为实践团队的一员，希望和大家在实践中互帮互学，一起解锁新收获！
+                        </div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="wangmuze.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">王沐泽</span></div>
+                        <div class="member-desc">大家好！我是来自未央51的王沐泽，一名有点i的e人，希望可以在这次事件中认识新朋友，和大家共度快乐时光～</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="nieningyu.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">聂凝钰</span></div>
+                        <div class="member-desc">
+                            我是自强54班的聂凝钰，超爱吃辣and总以探索美食为旅行第一目的的半i半e人一枚（？），酷爱台球、小说以及every新鲜事物！非常期待在陌生的地方和陌生的人成为朋友呀！</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group-header relation">🤝 内外联组</div>
+            <div class="member-grid">
+                <div class="member-card">
+                    <div class="member-photo-box">
+                        <img src="zhongrui.png" alt="副支队长" class="special-crop-top">
+                    </div>
+                    <div class="member-info">
+                        <div class="member-header">
+                            <span class="member-name">钟瑞</span>
+                            <span class="role-badge role-vice">联络副支队长</span>
+                        </div>
+                        <div class="member-desc">很高兴能参加此次先导实践~希望学有所长，收获知识、友谊、青春！</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="caijiaxin.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">蔡佳馨</span></div>
+                        <div class="member-desc">
+                            大家好，我是来自内蒙古的蔡佳馨，在品鉴羊肉和面食上颇有造诣（）平时喜欢打游戏、逛街和搞抽象，致力于老梗的复习与新梗的创作，欢迎大家找我玩！非常高兴能和大家一起去香港实践！！</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="liuyuchen.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">刘羽辰</span></div>
+                        <div class="member-desc">大家好，我是电45的刘羽辰。平常喜欢听音乐、看电影。希望能和大家一起经历愉快的实践活动，留下美好的回忆！</div>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-photo-box"><img src="gantiantian.png" alt="队员"></div>
+                    <div class="member-info">
+                        <div class="member-header"><span class="member-name">甘甜甜</span></div>
+                        <div class="member-desc">
+                            大家好！我是来自未央53班的甘甜甜，很高兴能与大家一起前往深圳和香港实践。小i人一枚，比较慢热，不过热起来之后还是十分滚烫滴。期待与大家的见面！</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="articles" class="content-section">
+            <div class="section-header">
+                <h1>推送合集</h1>
+                <div class="line"></div>
+            </div>
+
+            <div class="articles-grid">
+
+                <a href="https://mp.weixin.qq.com/s/WJSFgsm6Zkz4wn4b_gNd6Q" target="_blank" class="article-card">
+                    <div class="article-cover">
+                        <img src="tuisong1.jpg?v=2" alt="封面图" style="object-position: center center;">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">2026-01-30</div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <section id="gallery" class="content-section">
+            <div class="section-header">
+                <h1>影像合集</h1>
+                <div class="line"></div>
+            </div>
+            <div class="grid">
+                <div class="card"
+                    style="height:240px; background: linear-gradient(45deg, #f1f2f6, #f8f9fa); display:flex; align-items:center; justify-content:center; color:#b2bec3; font-weight: 500; letter-spacing: 1px;">
+                    📷 影像占位</div>
+                <div class="card"
+                    style="height:240px; background: linear-gradient(45deg, #f1f2f6, #f8f9fa); display:flex; align-items:center; justify-content:center; color:#b2bec3; font-weight: 500; letter-spacing: 1px;">
+                    📷 影像占位</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        &copy; 2026 源梦双碳 · 点亮深港实践支队 | 电机系
+    </footer>
+
+    <script>
+        function showSection(event, sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.classList.remove('active'));
+
+            const navItems = document.querySelectorAll('nav li');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            document.getElementById(sectionId).classList.add('active');
+            // 如果是点击导航项触发的，添加active类；如果是页面加载默认显示的，这里需要判断
+            if (event) {
+                 event.currentTarget.classList.add('active');
+            }
+            
+
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+
+</html>
