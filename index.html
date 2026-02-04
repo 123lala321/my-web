@@ -27,6 +27,10 @@
             line-height: 1.6;
             /* 优化文字渲染，使其在深色背景下更清晰 */
             -webkit-font-smoothing: antialiased;
+            /* 让 Body 变成弹性盒子，撑满全屏 */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* 顶部导航栏 */
@@ -97,7 +101,9 @@
         /* 主体内容容器 */
         main {
             margin-top: 70px;
-            min-height: calc(100vh - 70px);
+            /* 让 main 自动占据剩余空间，把 footer 挤到底部 */
+            flex: 1;
+            width: 100%;
             padding: 40px 8%;
         }
 
@@ -448,10 +454,19 @@
         @media (max-width: 600px) {
              .articles-grid { grid-template-columns: 1fr; }
              .article-cover { height: 220px; } /* 手机上高度稍微减小一点 */
+             
+             /* 首页大图在手机上限制最大高度 */
+             .hero-banner-container { max-height: 260px; }
         }
         
         footer {
-            text-align: center; padding: 60px 20px; color: #b2bec3; font-size: 1rem; font-weight: 500;
+            text-align: center; 
+            padding: 40px 20px; 
+            color: #b2bec3; 
+            font-size: 0.9rem; 
+            font-weight: 500;
+            width: 100%;
+            margin-top: auto; /* 配合 flex-direction: column 实现 sticky footer */
         }
     </style>
 </head>
@@ -555,7 +570,9 @@
                     </div>
                 </div>
                 <div class="member-card">
-                    <div class="member-photo-box"><img src="zhengjiheng.png" alt="队员"></div>
+                    <div class="member-photo-box">
+                         <img src="zhengjiheng.png" alt="队员" style="object-position: top center;">
+                    </div>
                     <div class="member-info">
                         <div class="member-header"><span class="member-name">郑霁恒</span></div>
                         <div class="member-desc">我是来自电45的郑霁恒，在本次实践中担任调研工作～我喜欢电影、音乐，也有（正在开发🤔）微量二次元属性，期待与大家同行！😉</div>
@@ -708,10 +725,11 @@
             </div>
         </section>
 
-        <footer>
-            &copy; 2026 源梦双碳 · 点亮深港实践支队 | 电机系
-        </footer>
     </main>
+
+    <footer>
+        &copy; 2026 源梦双碳 · 点亮深港实践支队 | 电机系
+    </footer>
 
     <script>
         function showSection(event, sectionId) {
