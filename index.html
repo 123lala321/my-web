@@ -364,12 +364,21 @@
             font-weight: 400;
         }
 
+        /* 针对手机屏幕的适配 */
         @media (max-width: 600px) {
             .member-grid { grid-template-columns: 1fr; gap: 25px; }
             .member-card { flex-direction: column; min-height: auto; }
+            /* 手机端固定照片高度为 240px */
             .member-photo-box { width: 100%; height: 240px; box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,0.1); }
             .member-info { padding: 25px; background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); }
             .member-card:hover { transform: translateY(-5px); }
+
+            /* === 新增：针对特定人物在手机端的头像调整 === */
+            /* 让带有这个类的图片在手机上强制以顶部对齐，显示头部 */
+            /* 使用 !important 确保覆盖掉默认的居中对齐设置 */
+            .member-photo-box img.special-crop-top {
+                object-position: top center !important;
+            }
         }
 
         /* === 推送合集样式 (修改版：宽幅封面适配，双列排布) === */
@@ -652,7 +661,9 @@
             <div class="group-header relation">🤝 内外联组</div>
             <div class="member-grid">
                 <div class="member-card">
-                    <div class="member-photo-box"><img src="zhongrui.png" alt="副支队长"></div>
+                    <div class="member-photo-box">
+                        <img src="zhongrui.png" alt="副支队长" class="special-crop-top">
+                    </div>
                     <div class="member-info">
                         <div class="member-header">
                             <span class="member-name">钟瑞</span>
