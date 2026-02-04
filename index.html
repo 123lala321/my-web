@@ -462,7 +462,24 @@
         /* 针对手机屏幕的适配，让宽卡片在手机上也能单列对齐 */
         @media (max-width: 600px) {
              .articles-grid { grid-template-columns: 1fr; }
-             .article-cover { height: 220px; } /* 手机上高度稍微减小一点 */
+             
+             /* === 核心修复：防止封面图比例变化 === */
+             .article-cover { 
+                 /* 1. 取消固定高度，改为自动，让高度跟随宽度和比例变化 */
+                 height: auto !important;
+                 
+                 /* 2. 设定一个标准的宽屏比例 (16:9)，保证图片框架稳定 
+                    如果你的图片本身不是16:9，浏览器会按 16:9 裁剪；
+                    如果你想完全完全由图片撑开，可以删掉 aspect-ratio 这行 */
+                 aspect-ratio: 16 / 9; 
+             } 
+             
+             .article-cover img {
+                 /* 3. 让图片高度也自动适应，不再强制拉伸 */
+                 height: 100%; 
+                 width: 100%;
+                 object-fit: cover; /* 保持填充，但因为比例已锁定，不会变形 */
+             }
              
              /* 首页大图在手机上限制最大高度 */
              .hero-banner-container { max-height: 260px; }
