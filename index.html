@@ -9,7 +9,6 @@
         :root {
             --primary-blue: #0052cc;
             --accent-green: #00b894;
-            /* 背景稍微灰一点点，让白卡片更突出 */
             --bg-color: #f5f7fa;
             --card-bg: #ffffff;
         }
@@ -25,8 +24,12 @@
             background-color: var(--bg-color);
             color: #2d3436;
             line-height: 1.6;
-            /* 优化文字渲染，使其在深色背景下更清晰 */
             -webkit-font-smoothing: antialiased;
+
+            /* === 关键修改 1：让 Body 变成弹性盒子，撑满全屏 === */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* 顶部导航栏 */
@@ -36,7 +39,6 @@
             width: 100%;
             height: 70px;
             background: rgba(255, 255, 255, 0.9);
-            /* 增强毛玻璃效果 */
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             display: flex;
@@ -97,13 +99,15 @@
         /* 主体内容容器 */
         main {
             margin-top: 70px;
-            min-height: calc(100vh - 70px);
             padding: 40px 8%;
+            
+            /* === 关键修改 2：让 main 自动占据剩余空间，把 footer 挤到底部 === */
+            flex: 1;
+            width: 100%; /* 确保宽度正常 */
         }
 
         .content-section {
             display: none;
-            /* 更平滑的上浮动画 */
             animation: slideUpSmooth 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -132,7 +136,6 @@
         .section-header .line {
             width: 80px;
             height: 5px;
-            /* 渐变线条 */
             background: linear-gradient(90deg, var(--primary-blue), var(--accent-green));
             margin: 15px auto;
             border-radius: 5px;
@@ -142,7 +145,6 @@
             background: var(--card-bg);
             padding: 40px;
             border-radius: 20px;
-            /* 更深邃、柔和的阴影，增加立体感 */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0,0,0,0.02);
             margin-bottom: 30px;
         }
@@ -160,7 +162,7 @@
             width: 100%;
             height: auto;
             display: block;
-            transform: scale(1.02); /* 轻微放大，避免边缘漏光 */
+            transform: scale(1.02);
         }
 
         .hero-content-overlay {
@@ -173,7 +175,6 @@
             text-align: center;
             color: white;
             padding: 40px;
-            /* 更丰富的渐变遮罩 */
             background: linear-gradient(to bottom, rgba(0,20,60,0.1) 0%, rgba(0, 30, 90, 0.6) 100%);
         }
 
@@ -200,7 +201,6 @@
             letter-spacing: 10px;
             text-indent: 10px;
             color: #ffffff;
-            /* 文字光晕效果 */
             text-shadow: 0 5px 15px rgba(0,0,0,0.2), 0 0 50px rgba(0, 82, 204, 0.5);
         }
 
@@ -212,19 +212,13 @@
             color: rgba(255, 255, 255, 0.95);
         }
 
-        @media (max-width: 600px) {
-            .hero-content-overlay .main-title { font-size: 3.5rem; letter-spacing: 4px; text-indent: 4px; }
-            .hero-content-overlay .prefix { font-size: 1rem; padding: 8px 20px; margin-bottom: 15px; letter-spacing: 1px;}
-            .hero-content-overlay .sub-title { font-size: 1.2rem; letter-spacing: 3px; }
-        }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
-        /* === 成员介绍板块专用样式 (V4: 流光科技风格) === */
+        /* 成员介绍 */
         .group-header {
             margin: 70px 0 30px 0;
             display: flex;
@@ -233,7 +227,6 @@
             font-weight: 800;
             color: #2d3436;
         }
-        /* 标题前的装饰竖条改成渐变光标 */
         .group-header::before {
             content: '';
             display: inline-block;
@@ -259,19 +252,16 @@
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
-            /* 初始阴影：深邃且柔和，让卡片浮起来 */
             box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.07), 0 5px 15px -5px rgba(0,0,0,0.03);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 更有弹性的动画曲线 */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: row;
             min-height: 200px;
-            border: 1px solid rgba(255,255,255,0.8); /* 微妙的边框增加质感 */
+            border: 1px solid rgba(255,255,255,0.8);
         }
 
-        /* 核心交互：悬停时的炫酷光晕 */
         .member-card:hover {
-            transform: translateY(-8px) scale(1.01); /* 上浮并轻微放大 */
-            /* 重点：带有颜色的扩散光晕阴影 */
+            transform: translateY(-8px) scale(1.01);
             box-shadow: 0 30px 60px -15px rgba(0, 82, 204, 0.25), 0 10px 20px -10px rgba(0, 82, 204, 0.1);
         }
 
@@ -281,7 +271,6 @@
             background-color: #f0f2f5;
             position: relative;
             overflow: hidden;
-            /* 给照片框加一个内阴影，增加嵌入感 */
             box-shadow: inset -5px 0 15px -5px rgba(0,0,0,0.1);
         }
 
@@ -291,10 +280,9 @@
         }
         
         .member-card:hover .member-photo-box img {
-            transform: scale(1.08); /* 悬停时照片缓慢放大 */
+            transform: scale(1.08);
         }
 
-        /* === 核心美化：文字区域的流光渐变 === */
         .member-info {
             padding: 30px 35px;
             flex-grow: 1;
@@ -302,14 +290,10 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
-            
-            /* V4重点：更现代、多层次的对角线渐变背景 (白 -> 极淡蓝 -> 柔和蓝) */
             background: linear-gradient(135deg, #ffffff 0%, #f4f9ff 50%, #e8f2ff 100%);
-            /* 顶部加一道高光，增加玻璃质感 */
             border-top: 1px solid rgba(255,255,255,0.9);
         }
         
-        /* 悬停时，渐变背景流动加深 */
         .member-card:hover .member-info {
             background: linear-gradient(135deg, #ffffff 0%, #edf6ff 50%, #ddeeff 100%);
         }
@@ -320,7 +304,6 @@
             align-items: center;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            /* 炫酷分割线：从蓝到透明的渐变光带 */
             border-bottom: 2px solid transparent;
             border-image: linear-gradient(to right, rgba(0,82,204,0.15), transparent) 1;
             position: relative;
@@ -336,42 +319,29 @@
         .role-badge {
             font-size: 0.8rem; 
             padding: 6px 14px; 
-            border-radius: 8px; /* 现代微圆角 */
+            border-radius: 8px;
             font-weight: 700; 
             color: #fff; 
             background-color: #b2bec3; 
             white-space: nowrap;
             letter-spacing: 0.5px;
-            /* 徽章也加一点光晕 */
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .role-teacher { background: linear-gradient(135deg, #6c5ce7, #8e7cf7); box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);}
         .role-captain { background: linear-gradient(135deg, #d63031, #ff5e57); box-shadow: 0 4px 12px rgba(214, 48, 49, 0.3);}
         .role-vice { background: linear-gradient(135deg, #e17055, #ff9f43); box-shadow: 0 4px 12px rgba(225, 112, 85, 0.3);}
-        .role-member { display: none; }
 
         .member-desc {
             font-size: 1rem;
-            color: #556; /* 颜色更深一点，提高对比度 */
+            color: #556;
             line-height: 1.7;
             text-align: justify;
             font-weight: 400;
         }
 
-        @media (max-width: 600px) {
-            .member-grid { grid-template-columns: 1fr; gap: 25px; }
-            .member-card { flex-direction: column; min-height: auto; }
-            .member-photo-box { width: 100%; height: 240px; box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,0.1); }
-            .member-info { padding: 25px; background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); }
-            .member-card:hover { transform: translateY(-5px); }
-        }
-
-        /* === 推送合集样式 (修改版：宽幅封面适配，双列排布) === */
+        /* 推送合集 */
         .articles-grid {
             display: grid;
-            /* 关键修改 1：大幅增加卡片最小宽度。
-               设为 420px，这样在绝大多数屏幕上会强制排布为 2 列（一行两个）。
-               卡片会非常宽敞，适合展示风景/宽幅封面。 */
             grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
             gap: 35px;
         }
@@ -394,8 +364,6 @@
         }
 
         .article-cover {
-            /* 关键修改 2：大幅增加图片容器高度。
-               改为 260px，配合 420px+ 的宽度，形成一个接近 16:9 的舒适宽幅比例。 */
             height: 260px;
             background-color: #eee;
             position: relative;
@@ -426,7 +394,7 @@
         }
 
         .article-title {
-            font-size: 1.35rem; /* 标题字号稍微加大一点，匹配大卡片 */
+            font-size: 1.35rem;
             font-weight: 800; 
             color: #2d3436; 
             margin-bottom: 15px; 
@@ -439,19 +407,48 @@
         }
 
         .read-btn {
-            margin-top: auto; align-self: flex-start; padding: 12px 28px; /* 按钮也稍微大一点 */
+            margin-top: auto; align-self: flex-start; padding: 12px 28px;
             background-color: rgba(0, 82, 204, 0.08); color: var(--primary-blue); text-decoration: none; border-radius: 30px; font-size: 1rem; font-weight: 700; transition: all 0.3s ease;
         }
         .read-btn:hover { background-color: var(--primary-blue); color: white; box-shadow: 0 5px 15px rgba(0, 82, 204, 0.3); transform: translateY(-2px);}
         
-        /* 针对手机屏幕的适配，让宽卡片在手机上也能单列对齐 */
+        /* 手机适配 (保留了之前的修复) */
         @media (max-width: 600px) {
-             .articles-grid { grid-template-columns: 1fr; }
-             .article-cover { height: 220px; } /* 手机上高度稍微减小一点 */
+            .hero-content-overlay .main-title { font-size: 3.5rem; letter-spacing: 4px; text-indent: 4px; }
+            .hero-content-overlay .prefix { font-size: 1rem; padding: 8px 20px; margin-bottom: 15px; letter-spacing: 1px;}
+            .hero-content-overlay .sub-title { font-size: 1.2rem; letter-spacing: 3px; }
+            
+            /* 首页大图高度限制 */
+            .hero-banner-container { max-height: 260px; }
+            .hero-real-image { height: 100%; width: 100%; object-fit: cover; }
+            .hero-content-overlay { padding: 20px; }
+
+            .member-grid { grid-template-columns: 1fr; gap: 20px; }
+            .member-card { flex-direction: column; min-height: auto; }
+            .member-card:hover { transform: none; }
+            
+            .member-photo-box { width: 100%; height: 280px; box-shadow: inset 0 -10px 20px -10px rgba(0, 0, 0, 0.1); }
+            .member-photo-box img { object-position: top center; }
+            
+            .member-info { padding: 20px; background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); }
+
+            .articles-grid { grid-template-columns: 1fr; gap: 25px; }
+            .article-cover { height: 200px; }
+            .article-cover img { object-fit: cover; object-position: center center; }
+            .article-title { font-size: 1.2rem; }
         }
-        
+
+        /* === 关键修改 3：Footer 样式微调 === */
         footer {
-            text-align: center; padding: 60px 20px; color: #b2bec3; font-size: 1rem; font-weight: 500;
+            /* 保证在最底部居中 */
+            text-align: center; 
+            padding: 40px 20px; 
+            color: #b2bec3; 
+            font-size: 0.9rem; 
+            font-weight: 500;
+            width: 100%;
+            /* 稍微加一点上边距，避免紧贴内容 */
+            margin-top: auto; 
         }
     </style>
 </head>
@@ -468,7 +465,6 @@
                 <li class="active" onclick="showSection(event, 'home')">首页</li>
                 <li onclick="showSection(event, 'intro')">实践简介</li>
                 <li onclick="showSection(event, 'members')">成员介绍</li>
-                <li onclick="showSection(event, 'results')">调研成果</li>
                 <li onclick="showSection(event, 'articles')">推送合集</li>
                 <li onclick="showSection(event, 'gallery')">影像合集</li>
             </ul>
@@ -669,16 +665,6 @@
             </div>
         </section>
 
-        <section id="results" class="content-section">
-            <div class="section-header">
-                <h1>调研成果</h1>
-                <div class="line"></div>
-            </div>
-            <div class="card" style="min-height: 300px; display: flex; justify-content: center; align-items: center;">
-                <p style="font-size: 1.2rem; color: #999;">📊 内容填充中，敬请期待...</p>
-            </div>
-        </section>
-
         <section id="articles" class="content-section">
             <div class="section-header">
                 <h1>推送合集</h1>
@@ -717,10 +703,11 @@
             </div>
         </section>
 
-        <footer>
-            &copy; 2026 源梦双碳 · 点亮深港实践支队 | 电机系
-        </footer>
     </main>
+
+    <footer>
+        &copy; 2026 源梦双碳 · 点亮深港实践支队 | 电机系
+    </footer>
 
     <script>
         function showSection(event, sectionId) {
@@ -735,7 +722,7 @@
             if (event) {
                  event.currentTarget.classList.add('active');
             }
-           
+            
 
             window.scrollTo(0, 0);
         }
