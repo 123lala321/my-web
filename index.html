@@ -122,10 +122,22 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* === 装饰性背景图形 === */
+        .decor-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .blob-1 { top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(0, 82, 204, 0.1); }
+        .blob-2 { bottom: 50px; right: -50px; width: 150px; height: 150px; background: rgba(0, 184, 148, 0.15); }
+
         /* 模块通用样式 */
         .section-header {
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             text-align: center;
+            position: relative;
         }
 
         .section-header h1 {
@@ -151,6 +163,116 @@
             /* 更深邃、柔和的阴影，增加立体感 */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0,0,0,0.02);
             margin-bottom: 30px;
+        }
+
+        /* === 实践目标主卡片 (Mission Card) === */
+        .mission-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0,0,0,0.02);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        /* 背景水印图标 */
+        .mission-watermark {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 8rem;
+            opacity: 0.03;
+            color: var(--primary-blue);
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .mission-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #2d3436;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mission-title::before {
+            content: '🎯';
+            margin-right: 12px;
+            font-size: 1.4rem;
+        }
+
+        .mission-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* 文字高亮装饰 */
+        .highlight-text {
+            color: var(--primary-blue);
+            font-weight: 700;
+            background: rgba(0, 82, 204, 0.05);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        /* === 关键亮点小卡片 (Highlights) === */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .highlight-item {
+            background: linear-gradient(145deg, #ffffff, #f9fbff);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+        
+        .highlight-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 82, 204, 0.1);
+            border-color: rgba(0, 82, 204, 0.1);
+        }
+
+        .highlight-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(0, 82, 204, 0.1);
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .h-green .highlight-icon { background: rgba(0, 184, 148, 0.1); color: var(--accent-green); }
+        .h-purple .highlight-icon { background: rgba(108, 92, 231, 0.1); color: #6c5ce7; }
+
+        .highlight-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #2d3436;
+        }
+        
+        .highlight-content p {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0;
         }
 
         /* 首页大图 */
@@ -364,21 +486,76 @@
             font-weight: 400;
         }
 
-        /* 针对手机屏幕的适配 */
-        @media (max-width: 600px) {
-            .member-grid { grid-template-columns: 1fr; gap: 25px; }
-            .member-card { flex-direction: column; min-height: auto; }
-            /* 手机端固定照片高度为 240px */
-            .member-photo-box { width: 100%; height: 240px; box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,0.1); }
-            .member-info { padding: 25px; background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); }
-            .member-card:hover { transform: translateY(-5px); }
+        /* === 新增：行程安排样式 === */
+        .schedule-box {
+            margin-top: 40px;
+        }
+        
+        .schedule-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #2d3436;
+        }
 
-            /* === 新增：针对特定人物在手机端的头像调整 === */
-            /* 让带有这个类的图片在手机上强制以顶部对齐，显示头部 */
-            /* 使用 !important 确保覆盖掉默认的居中对齐设置 */
-            .member-photo-box img.special-crop-top {
-                object-position: top center !important;
-            }
+        .schedule-grid {
+            display: grid;
+            /* 自动适应列数，每列最小160px，适合日历卡片 */
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+        }
+
+        .schedule-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 82, 204, 0.15);
+            border-color: rgba(0, 82, 204, 0.1);
+        }
+
+        .date-tag {
+            background: rgba(0, 82, 204, 0.1);
+            color: var(--primary-blue);
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        
+        /* 特殊日期的样式（过关/返程） */
+        .schedule-card.transit .date-tag {
+            background: rgba(0, 184, 148, 0.1);
+            color: var(--accent-green);
+        }
+
+        .schedule-item {
+            font-size: 0.95rem;
+            color: #2d3436;
+            margin-bottom: 6px;
+            line-height: 1.4;
+            font-weight: 500;
+            position: relative;
+            padding-left: 12px;
+        }
+        
+        .schedule-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ccc;
         }
 
         /* === 推送合集样式 (修改版：宽幅封面适配，双列排布) === */
@@ -445,8 +622,41 @@
             content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px rgba(0, 184, 148, 0.4);
         }
 
+        .article-title {
+            font-size: 1.35rem; /* 标题字号稍微加大一点，匹配大卡片 */
+            font-weight: 800; 
+            color: #2d3436; 
+            margin-bottom: 15px; 
+            line-height: 1.4; 
+            letter-spacing: -0.5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-btn {
+            margin-top: auto; align-self: flex-start; padding: 12px 28px; /* 按钮也稍微大一点 */
+            background-color: rgba(0, 82, 204, 0.08); color: var(--primary-blue); text-decoration: none; border-radius: 30px; font-size: 1rem; font-weight: 700; transition: all 0.3s ease;
+        }
+        .read-btn:hover { background-color: var(--primary-blue); color: white; box-shadow: 0 5px 15px rgba(0, 82, 204, 0.3); transform: translateY(-2px);}
+        
         /* 针对手机屏幕的适配，让宽卡片在手机上也能单列对齐 */
         @media (max-width: 600px) {
+            .member-grid { grid-template-columns: 1fr; gap: 25px; }
+            .member-card { flex-direction: column; min-height: auto; }
+            /* 手机端固定照片高度为 240px */
+            .member-photo-box { width: 100%; height: 240px; box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,0.1); }
+            .member-info { padding: 25px; background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); }
+            .member-card:hover { transform: translateY(-5px); }
+
+            /* === 新增：针对特定人物在手机端的头像调整 === */
+            /* 让带有这个类的图片在手机上强制以顶部对齐，显示头部 */
+            /* 使用 !important 确保覆盖掉默认的居中对齐设置 */
+            .member-photo-box img.special-crop-top {
+                object-position: top center !important;
+            }
+
              .articles-grid { grid-template-columns: 1fr; }
              
              /* === 核心修复：防止封面图比例变化 === */
@@ -469,6 +679,12 @@
              
              /* 首页大图在手机上限制最大高度 */
              .hero-banner-container { max-height: 260px; }
+
+             /* 实践简介卡片在手机端调整 */
+             .mission-card { padding: 25px; }
+             .mission-title { font-size: 1.3rem; }
+             .highlights-grid { grid-template-columns: 1fr; }
+             .schedule-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
         }
         
         footer {
@@ -515,18 +731,114 @@
             <div style="margin-top: 40px;" class="card">
                 <h2 style="font-weight: 800; letter-spacing: -0.5px;">最新公告</h2>
                 <hr style="margin: 20px 0; border: 0; height: 1px; background: rgba(0,0,0,0.05);">
-                <p style="font-size: 1.05rem;">本支队已完成前期文献综述，即将开启实地考察。我们将深入调研两地电网互联机制，探索碳中和背景下的新型电力系统建设。</p>
+                <p style="font-size: 1.05rem;">
+                    🚀 <strong>行程更新 (2.6)</strong><br>
+                    昨日，支队圆满完成了对 <strong>中电集团</strong> 与 <strong>中联办</strong> 的参访交流，收获颇丰。
+                    <br><br>
+                    今日上午10点，我们将前往 <strong>南网国际</strong> 进行实地调研，深入探讨粤港澳电力互联互通与跨境能源合作。点亮深港，步履不停！
+                </p>
             </div>
         </section>
 
         <section id="intro" class="content-section">
+            <div style="position: relative;">
+                <div class="decor-blob blob-1"></div>
+                <div class="decor-blob blob-2"></div>
+            </div>
+
             <div class="section-header">
                 <h1>实践简介</h1>
                 <div class="line"></div>
             </div>
-            <div class="card">
-                <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 15px;">实践目标</h3>
-                <p style="font-size: 1.05rem;">探索大湾区在迈向“双碳”目标过程中的电力技术路径，特别是深港两地在电网互联、可再生能源并网及电力交易机制上的差异与互补。</p>
+            
+            <div class="mission-card">
+                <div class="mission-watermark">🚀</div>
+                
+                <h3 class="mission-title">实践目标</h3>
+                <p class="mission-text">
+                    本次“源梦双碳·先导计划”赴深圳、香港实践支队，旨在深度调研香港电力行业的<span class="highlight-text">市场化运营模式</span>、<span class="highlight-text">可再生能源技术应用</span>及区域协同发展策略。
+                    <br><br>
+                    支队将重点与港理工、港城大等高校沟通交流，走进中电集团等企业，结合南方电网国际等机构的跨境互联实践，探究<span class="highlight-text">粤港澳大湾区</span>背景下的电网规划、低碳转型路径与技术创新挑战，力求形成兼具学术洞察与实践价值的调研成果。
+                </p>
+            </div>
+
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <div class="highlight-icon">💹</div>
+                    <div class="highlight-content">
+                        <h4>市场运营</h4>
+                        <p>探究香港电力市场化模式</p>
+                    </div>
+                </div>
+                <div class="highlight-item h-green">
+                    <div class="highlight-icon">🌱</div>
+                    <div class="highlight-content">
+                        <h4>绿色能源</h4>
+                        <p>双碳背景下的低碳转型</p>
+                    </div>
+                </div>
+                <div class="highlight-item h-purple">
+                    <div class="highlight-content">
+                        <div class="highlight-icon">🤝</div>
+                    </div>
+                    <div class="highlight-content">
+                        <h4>区域协同</h4>
+                        <p>粤港澳大湾区互联互通</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-box">
+                <div class="schedule-title">📅 行程安排</div>
+                <div class="schedule-grid">
+                    <div class="schedule-card transit">
+                        <div class="date-tag">1.31 周六</div>
+                        <div class="schedule-item">去程</div>
+                        <div class="schedule-item">全员集合</div>
+                    </div>
+                    <div class="schedule-card">
+                        <div class="date-tag">2.1 周日</div>
+                        <div class="schedule-item">改革开放展览馆</div>
+                        <div class="schedule-item">莲花山</div>
+                    </div>
+                    <div class="schedule-card">
+                        <div class="date-tag">2.2 周一</div>
+                        <div class="schedule-item">纽达投资(午餐会)</div>
+                        <div class="schedule-item">香港城市大学</div>
+                    </div>
+                    <div class="schedule-card transit">
+                        <div class="date-tag">2.3 周二</div>
+                        <div class="schedule-item">过海关</div>
+                        <div class="schedule-item">香港入住</div>
+                    </div>
+                    <div class="schedule-card">
+                        <div class="date-tag">2.4 周三</div>
+                        <div class="schedule-item">港灯公司</div>
+                    </div>
+                    <div class="schedule-card">
+                        <div class="date-tag">2.5 周四</div>
+                        <div class="schedule-item">中电集团</div>
+                        <div class="schedule-item">香港理工大学</div>
+                    </div>
+                    <div class="schedule-card">
+                        <div class="date-tag">2.6 周五</div>
+                        <div class="schedule-item">南网国际</div>
+                        <div class="schedule-item">中联办</div>
+                    </div>
+                    <div class="schedule-card">
+                        <div class="date-tag">2.7 周六</div>
+                        <div class="schedule-item">零碳天地</div>
+                    </div>
+                    <div class="schedule-card transit">
+                        <div class="date-tag">2.8 周日</div>
+                        <div class="schedule-item">过海关</div>
+                        <div class="schedule-item">深圳入住</div>
+                    </div>
+                    <div class="schedule-card transit">
+                        <div class="date-tag">2.9 周一</div>
+                        <div class="schedule-item">返程</div>
+                    </div>
+                </div>
             </div>
         </section>
 
