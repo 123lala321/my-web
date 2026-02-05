@@ -9,6 +9,7 @@
         :root {
             --primary-blue: #0052cc;
             --accent-green: #00b894;
+            /* 背景稍微灰一点点，让白卡片更突出 */
             --bg-color: #f5f7fa;
             --card-bg: #ffffff;
         }
@@ -24,31 +25,32 @@
             background-color: var(--bg-color);
             color: #2d3436;
             line-height: 1.6;
+            /* 优化文字渲染，使其在深色背景下更清晰 */
             -webkit-font-smoothing: antialiased;
+            /* 让 Body 变成弹性盒子，撑满全屏 */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* === 顶部导航栏 (核心修改区域) === */
+        /* 顶部导航栏 */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            /* 1. 移除固定高度，改为自动高度，以便容纳多行内容 */
+            /* 移除固定高度，改为自动高度 */
             height: auto;
             min-height: 70px; 
-            background: rgba(255, 255, 255, 0.95); /* 稍微增加不透明度，防止背景杂乱 */
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* 增加上下内边距，让两行排布不拥挤 */
             padding: 10px 5%;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
             z-index: 1000;
-            /* 允许内容换行 (关键属性) */
+            /* 允许内容换行 */
             flex-wrap: wrap;
         }
 
@@ -64,22 +66,17 @@
         }
 
         .logo-icon {
-            height: 40px; /*稍微调小一点适配双行 */
+            height: 40px;
             width: auto;
             margin-right: 10px;
-        }
-
-        nav {
-            /* 电脑端保持靠右，手机端会被重置 */
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            /* 2. 允许导航项自动换行 (关键属性) */
+            /* 允许导航项自动换行 */
             flex-wrap: wrap; 
             gap: 5px;
-            /* 居中对齐，多行时更好看 */
             justify-content: center; 
         }
 
@@ -92,7 +89,6 @@
             font-weight: 600;
             color: #636e72;
             white-space: nowrap;
-            /* 增加一点下外边距，防止多行时粘在一起 */
             margin-bottom: 2px;
         }
 
@@ -107,32 +103,29 @@
             box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
         }
 
-        /* === 手机端针对性修复 (变成上下两行) === */
+        /* 手机端头部适配 */
         @media (max-width: 600px) {
             header {
-                /* 强制变成垂直排列：Logo 在上，导航在下 */
                 flex-direction: column; 
                 padding: 15px 10px;
             }
             
             .logo { 
                 font-size: 1.3rem; 
-                margin-bottom: 12px; /* Logo 和导航栏之间的距离 */
+                margin-bottom: 12px;
             }
             
-            nav {
-                width: 100%; /* 导航栏占满整行 */
-            }
+            nav { width: 100%; }
 
             nav ul { 
-                justify-content: center; /* 导航项居中排列 */
-                gap: 8px; /* 按钮之间的间距 */
+                justify-content: center; 
+                gap: 8px; 
             }
 
             nav li { 
                 padding: 6px 14px; 
                 font-size: 0.85rem; 
-                background-color: rgba(255,255,255,0.5); /* 手机端给未选中的加一点底色，防误触 */
+                background-color: rgba(255,255,255,0.5);
                 border: 1px solid rgba(0,0,0,0.05);
             }
             
@@ -143,19 +136,18 @@
 
         /* 主体内容容器 */
         main {
-            /* 3. 增加顶部间距 */
-            /* 因为头部变成两行变高了，所以这里要预留更多空间，否则内容会被挡住 */
             margin-top: 80px; 
             flex: 1;
             width: 100%;
             padding: 40px 8%;
         }
         
-        /* 手机端 Main 的顶部间距需要更多 */
+        /* 手机端 Main 适配 */
         @media (max-width: 600px) {
             main {
-                /* 预留大约 160px 给双行头部 (Logo行 + 导航行) */
                 margin-top: 150px; 
+                /* 关键修改：减小手机端左右边距，让内容（和图片）显得更宽 */
+                padding: 40px 4%; 
             }
         }
 
@@ -675,8 +667,19 @@
             .member-photo-box img.special-crop-top { object-position: top center !important; }
 
             .articles-grid { grid-template-columns: 1fr; }
-            .article-cover { height: auto !important; aspect-ratio: 16 / 9; } 
-            .article-cover img { height: 100%; width: 100%; object-fit: cover; }
+            
+            /* === 核心修复：防止封面图裁剪 === */
+            .article-cover { 
+                height: auto !important; 
+                aspect-ratio: unset !important; 
+            } 
+            .article-cover img { 
+                width: 100%; 
+                height: auto !important; 
+                object-fit: contain; 
+                display: block; 
+            }
+
             .hero-banner-container { max-height: 260px; }
             
             .mission-card { padding: 25px; }
