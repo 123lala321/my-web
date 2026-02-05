@@ -9,7 +9,6 @@
         :root {
             --primary-blue: #0052cc;
             --accent-green: #00b894;
-            /* 背景稍微灰一点点，让白卡片更突出 */
             --bg-color: #f5f7fa;
             --card-bg: #ffffff;
         }
@@ -25,9 +24,7 @@
             background-color: var(--bg-color);
             color: #2d3436;
             line-height: 1.6;
-            /* 优化文字渲染，使其在深色背景下更清晰 */
             -webkit-font-smoothing: antialiased;
-            /* 让 Body 变成弹性盒子，撑满全屏 */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -40,7 +37,6 @@
             width: 100%;
             height: 70px;
             background: rgba(255, 255, 255, 0.9);
-            /* 增强毛玻璃效果 */
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             display: flex;
@@ -58,6 +54,13 @@
             display: flex;
             align-items: center;
             letter-spacing: -0.5px;
+            
+            /* === 关键修复 1：增加行高，防止文字顶部被切 === */
+            line-height: 1.5; 
+            /* === 关键修复 2：防止文字换行 === */
+            white-space: nowrap; 
+            /* 稍微加一点上内边距微调垂直位置 */
+            padding-top: 2px;
         }
 
         .logo-icon {
@@ -80,6 +83,7 @@
             font-size: 0.95rem;
             font-weight: 600;
             color: #636e72;
+            white-space: nowrap; /* 防止导航文字换行 */
         }
 
         nav li:hover {
@@ -93,15 +97,37 @@
             box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
         }
 
+        /* 平板适配 */
         @media (max-width: 768px) {
             nav ul { gap: 2px; }
             nav li { padding: 6px 12px; font-size: 0.85rem; }
         }
 
+        /* === 重点：手机端针对性修复 === */
+        @media (max-width: 600px) {
+            /* 减小头部两侧间距，腾出空间 */
+            header { padding: 0 10px; }
+            
+            /* 缩小 Logo 字号和图片，避免挤压 */
+            .logo { 
+                font-size: 1.1rem; /* 字号改小 */
+            }
+            .logo-icon { 
+                height: 32px; /* 图标改小 */
+                margin-right: 6px; 
+            }
+
+            /* 进一步压缩导航栏空间，确保能和 Logo 放得下 */
+            nav li { 
+                padding: 4px 6px; 
+                font-size: 0.75rem; /* 导航字体缩小 */
+                border-radius: 15px;
+            }
+        }
+
         /* 主体内容容器 */
         main {
             margin-top: 70px;
-            /* 让 main 自动占据剩余空间，把 footer 挤到底部 */
             flex: 1;
             width: 100%;
             padding: 40px 8%;
@@ -109,7 +135,6 @@
 
         .content-section {
             display: none;
-            /* 更平滑的上浮动画 */
             animation: slideUpSmooth 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -122,7 +147,7 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* === 装饰性背景图形 === */
+        /* 装饰性背景图形 */
         .decor-blob {
             position: absolute;
             border-radius: 50%;
@@ -150,7 +175,6 @@
         .section-header .line {
             width: 80px;
             height: 5px;
-            /* 渐变线条 */
             background: linear-gradient(90deg, var(--primary-blue), var(--accent-green));
             margin: 15px auto;
             border-radius: 5px;
@@ -160,12 +184,11 @@
             background: var(--card-bg);
             padding: 40px;
             border-radius: 20px;
-            /* 更深邃、柔和的阴影，增加立体感 */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0,0,0,0.02);
             margin-bottom: 30px;
         }
 
-        /* === 实践目标主卡片 (Mission Card) === */
+        /* 实践目标主卡片 */
         .mission-card {
             background: #fff;
             border-radius: 16px;
@@ -177,7 +200,6 @@
             border-left: 5px solid var(--primary-blue);
         }
 
-        /* 背景水印图标 */
         .mission-watermark {
             position: absolute;
             top: 20px;
@@ -211,7 +233,6 @@
             text-align: justify;
         }
 
-        /* 文字高亮装饰 */
         .highlight-text {
             color: var(--primary-blue);
             font-weight: 700;
@@ -220,7 +241,7 @@
             border-radius: 4px;
         }
 
-        /* === 关键亮点小卡片 (Highlights) === */
+        /* 关键亮点小卡片 */
         .highlights-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -288,7 +309,7 @@
             width: 100%;
             height: auto;
             display: block;
-            transform: scale(1.02); /* 轻微放大，避免边缘漏光 */
+            transform: scale(1.02);
         }
 
         .hero-content-overlay {
@@ -301,7 +322,6 @@
             text-align: center;
             color: white;
             padding: 40px;
-            /* 更丰富的渐变遮罩 */
             background: linear-gradient(to bottom, rgba(0,20,60,0.1) 0%, rgba(0, 30, 90, 0.6) 100%);
         }
 
@@ -328,7 +348,6 @@
             letter-spacing: 10px;
             text-indent: 10px;
             color: #ffffff;
-            /* 文字光晕效果 */
             text-shadow: 0 5px 15px rgba(0,0,0,0.2), 0 0 50px rgba(0, 82, 204, 0.5);
         }
 
@@ -352,7 +371,7 @@
             gap: 25px;
         }
 
-        /* === 成员介绍板块专用样式 (V4: 流光科技风格) === */
+        /* 成员介绍 */
         .group-header {
             margin: 70px 0 30px 0;
             display: flex;
@@ -361,7 +380,6 @@
             font-weight: 800;
             color: #2d3436;
         }
-        /* 标题前的装饰竖条改成渐变光标 */
         .group-header::before {
             content: '';
             display: inline-block;
@@ -387,19 +405,16 @@
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
-            /* 初始阴影：深邃且柔和，让卡片浮起来 */
             box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.07), 0 5px 15px -5px rgba(0,0,0,0.03);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 更有弹性的动画曲线 */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: row;
             min-height: 200px;
-            border: 1px solid rgba(255,255,255,0.8); /* 微妙的边框增加质感 */
+            border: 1px solid rgba(255,255,255,0.8);
         }
 
-        /* 核心交互：悬停时的炫酷光晕 */
         .member-card:hover {
-            transform: translateY(-8px) scale(1.01); /* 上浮并轻微放大 */
-            /* 重点：带有颜色的扩散光晕阴影 */
+            transform: translateY(-8px) scale(1.01);
             box-shadow: 0 30px 60px -15px rgba(0, 82, 204, 0.25), 0 10px 20px -10px rgba(0, 82, 204, 0.1);
         }
 
@@ -409,7 +424,6 @@
             background-color: #f0f2f5;
             position: relative;
             overflow: hidden;
-            /* 给照片框加一个内阴影，增加嵌入感 */
             box-shadow: inset -5px 0 15px -5px rgba(0,0,0,0.1);
         }
 
@@ -419,10 +433,9 @@
         }
         
         .member-card:hover .member-photo-box img {
-            transform: scale(1.08); /* 悬停时照片缓慢放大 */
+            transform: scale(1.08);
         }
 
-        /* === 核心美化：文字区域的流光渐变 === */
         .member-info {
             padding: 30px 35px;
             flex-grow: 1;
@@ -430,14 +443,10 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
-            
-            /* V4重点：更现代、多层次的对角线渐变背景 (白 -> 极淡蓝 -> 柔和蓝) */
             background: linear-gradient(135deg, #ffffff 0%, #f4f9ff 50%, #e8f2ff 100%);
-            /* 顶部加一道高光，增加玻璃质感 */
             border-top: 1px solid rgba(255,255,255,0.9);
         }
         
-        /* 悬停时，渐变背景流动加深 */
         .member-card:hover .member-info {
             background: linear-gradient(135deg, #ffffff 0%, #edf6ff 50%, #ddeeff 100%);
         }
@@ -448,7 +457,6 @@
             align-items: center;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            /* 炫酷分割线：从蓝到透明的渐变光带 */
             border-bottom: 2px solid transparent;
             border-image: linear-gradient(to right, rgba(0,82,204,0.15), transparent) 1;
             position: relative;
@@ -464,13 +472,12 @@
         .role-badge {
             font-size: 0.8rem; 
             padding: 6px 14px; 
-            border-radius: 8px; /* 现代微圆角 */
+            border-radius: 8px;
             font-weight: 700; 
             color: #fff; 
             background-color: #b2bec3; 
             white-space: nowrap;
             letter-spacing: 0.5px;
-            /* 徽章也加一点光晕 */
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .role-teacher { background: linear-gradient(135deg, #6c5ce7, #8e7cf7); box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);}
@@ -480,13 +487,13 @@
 
         .member-desc {
             font-size: 1rem;
-            color: #556; /* 颜色更深一点，提高对比度 */
+            color: #556;
             line-height: 1.7;
             text-align: justify;
             font-weight: 400;
         }
 
-        /* === 新增：行程安排样式 === */
+        /* 行程安排样式 */
         .schedule-box {
             margin-top: 40px;
         }
@@ -501,7 +508,6 @@
 
         .schedule-grid {
             display: grid;
-            /* 自动适应列数，每列最小160px，适合日历卡片 */
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 20px;
         }
@@ -535,7 +541,6 @@
             display: inline-block;
         }
         
-        /* 特殊日期的样式（过关/返程） */
         .schedule-card.transit .date-tag {
             background: rgba(0, 184, 148, 0.1);
             color: var(--accent-green);
@@ -558,17 +563,13 @@
             color: #ccc;
         }
 
-        /* === 推送合集样式 (修改版：宽幅封面适配，双列排布) === */
+        /* 推送合集样式 */
         .articles-grid {
             display: grid;
-            /* 关键修改 1：大幅增加卡片最小宽度。
-               设为 420px，这样在绝大多数屏幕上会强制排布为 2 列（一行两个）。
-               卡片会非常宽敞，适合展示风景/宽幅封面。 */
             grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
             gap: 35px;
         }
 
-        /* 关键修改：将 div 改为 a 标签，让整个卡片可点击 */
         .article-card {
             background: #fff;
             border-radius: 16px;
@@ -579,7 +580,6 @@
             flex-direction: column;
             border: 1px solid rgba(0,0,0,0.03);
             height: 100%;
-            /* 核心：去除链接的默认样式 */
             text-decoration: none;
             color: inherit;
             cursor: pointer;
@@ -591,8 +591,6 @@
         }
 
         .article-cover {
-            /* 关键修改 2：大幅增加图片容器高度。
-               改为 260px，配合 420px+ 的宽度，形成一个接近 16:9 的舒适宽幅比例。 */
             height: 260px;
             background-color: #eee;
             position: relative;
@@ -622,69 +620,24 @@
             content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px rgba(0, 184, 148, 0.4);
         }
 
-        .article-title {
-            font-size: 1.35rem; /* 标题字号稍微加大一点，匹配大卡片 */
-            font-weight: 800; 
-            color: #2d3436; 
-            margin-bottom: 15px; 
-            line-height: 1.4; 
-            letter-spacing: -0.5px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .read-btn {
-            margin-top: auto; align-self: flex-start; padding: 12px 28px; /* 按钮也稍微大一点 */
-            background-color: rgba(0, 82, 204, 0.08); color: var(--primary-blue); text-decoration: none; border-radius: 30px; font-size: 1rem; font-weight: 700; transition: all 0.3s ease;
-        }
-        .read-btn:hover { background-color: var(--primary-blue); color: white; box-shadow: 0 5px 15px rgba(0, 82, 204, 0.3); transform: translateY(-2px);}
-        
-        /* 针对手机屏幕的适配，让宽卡片在手机上也能单列对齐 */
+        /* 针对手机屏幕的适配 */
         @media (max-width: 600px) {
             .member-grid { grid-template-columns: 1fr; gap: 25px; }
             .member-card { flex-direction: column; min-height: auto; }
-            /* 手机端固定照片高度为 240px */
             .member-photo-box { width: 100%; height: 240px; box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,0.1); }
             .member-info { padding: 25px; background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); }
             .member-card:hover { transform: translateY(-5px); }
+            .member-photo-box img.special-crop-top { object-position: top center !important; }
 
-            /* === 新增：针对特定人物在手机端的头像调整 === */
-            /* 让带有这个类的图片在手机上强制以顶部对齐，显示头部 */
-            /* 使用 !important 确保覆盖掉默认的居中对齐设置 */
-            .member-photo-box img.special-crop-top {
-                object-position: top center !important;
-            }
-
-             .articles-grid { grid-template-columns: 1fr; }
-             
-             /* === 核心修复：防止封面图比例变化 === */
-             .article-cover { 
-                 /* 1. 取消固定高度，改为自动，让高度跟随宽度和比例变化 */
-                 height: auto !important;
-                 
-                 /* 2. 设定一个标准的宽屏比例 (16:9)，保证图片框架稳定 
-                    如果你的图片本身不是16:9，浏览器会按 16:9 裁剪；
-                    如果你想完全完全由图片撑开，可以删掉 aspect-ratio 这行 */
-                 aspect-ratio: 16 / 9; 
-             } 
-             
-             .article-cover img {
-                 /* 3. 让图片高度也自动适应，不再强制拉伸 */
-                 height: 100%; 
-                 width: 100%;
-                 object-fit: cover; /* 保持填充，但因为比例已锁定，不会变形 */
-             }
-             
-             /* 首页大图在手机上限制最大高度 */
-             .hero-banner-container { max-height: 260px; }
-
-             /* 实践简介卡片在手机端调整 */
-             .mission-card { padding: 25px; }
-             .mission-title { font-size: 1.3rem; }
-             .highlights-grid { grid-template-columns: 1fr; }
-             .schedule-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .articles-grid { grid-template-columns: 1fr; }
+            .article-cover { height: auto !important; aspect-ratio: 16 / 9; } 
+            .article-cover img { height: 100%; width: 100%; object-fit: cover; }
+            .hero-banner-container { max-height: 260px; }
+            
+            .mission-card { padding: 25px; }
+            .mission-title { font-size: 1.3rem; }
+            .highlights-grid { grid-template-columns: 1fr; }
+            .schedule-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
         }
         
         footer {
@@ -694,7 +647,7 @@
             font-size: 0.9rem; 
             font-weight: 500;
             width: 100%;
-            margin-top: auto; /* 配合 flex-direction: column 实现 sticky footer */
+            margin-top: auto;
         }
     </style>
 </head>
