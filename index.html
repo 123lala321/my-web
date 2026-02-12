@@ -40,7 +40,7 @@
             width: 100%;
             /* 移除固定高度，改为自动高度 */
             height: auto;
-            min-height: 70px; 
+            min-height: 70px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -75,9 +75,9 @@
             display: flex;
             list-style: none;
             /* 允许导航项自动换行 */
-            flex-wrap: wrap; 
+            flex-wrap: wrap;
             gap: 5px;
-            justify-content: center; 
+            justify-content: center;
         }
 
         nav li {
@@ -106,29 +106,31 @@
         /* 手机端头部适配 */
         @media (max-width: 600px) {
             header {
-                flex-direction: column; 
+                flex-direction: column;
                 padding: 15px 10px;
             }
-            
-            .logo { 
-                font-size: 1.3rem; 
+
+            .logo {
+                font-size: 1.3rem;
                 margin-bottom: 12px;
             }
-            
-            nav { width: 100%; }
 
-            nav ul { 
-                justify-content: center; 
-                gap: 8px; 
+            nav {
+                width: 100%;
             }
 
-            nav li { 
-                padding: 6px 14px; 
-                font-size: 0.85rem; 
-                background-color: rgba(255,255,255,0.5);
-                border: 1px solid rgba(0,0,0,0.05);
+            nav ul {
+                justify-content: center;
+                gap: 8px;
             }
-            
+
+            nav li {
+                padding: 6px 14px;
+                font-size: 0.85rem;
+                background-color: rgba(255, 255, 255, 0.5);
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
             nav li.active {
                 border: 1px solid var(--primary-blue);
             }
@@ -136,18 +138,18 @@
 
         /* 主体内容容器 */
         main {
-            margin-top: 80px; 
+            margin-top: 80px;
             flex: 1;
             width: 100%;
             padding: 40px 8%;
         }
-        
+
         /* 手机端 Main 适配 */
         @media (max-width: 600px) {
             main {
-                margin-top: 150px; 
+                margin-top: 150px;
                 /* 关键修改：减小手机端左右边距，让内容（和图片）显得更宽 */
-                padding: 40px 4%; 
+                padding: 40px 4%;
             }
         }
 
@@ -161,8 +163,15 @@
         }
 
         @keyframes slideUpSmooth {
-            from { opacity: 0; transform: translateY(30px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         /* 装饰性背景图形 */
@@ -173,8 +182,22 @@
             z-index: -1;
             opacity: 0.5;
         }
-        .blob-1 { top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(0, 82, 204, 0.1); }
-        .blob-2 { bottom: 50px; right: -50px; width: 150px; height: 150px; background: rgba(0, 184, 148, 0.15); }
+
+        .blob-1 {
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 82, 204, 0.1);
+        }
+
+        .blob-2 {
+            bottom: 50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(0, 184, 148, 0.15);
+        }
 
         /* 模块通用样式 */
         .section-header {
@@ -202,7 +225,7 @@
             background: var(--card-bg);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0, 0, 0, 0.02);
             margin-bottom: 30px;
         }
 
@@ -211,7 +234,7 @@
             background: #fff;
             border-radius: 16px;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 5px 15px rgba(0, 0, 0, 0.02);
             margin-bottom: 30px;
             position: relative;
             overflow: hidden;
@@ -237,7 +260,7 @@
             display: flex;
             align-items: center;
         }
-        
+
         .mission-title::before {
             content: '🎯';
             margin-right: 12px;
@@ -271,13 +294,13 @@
             background: linear-gradient(145deg, #ffffff, #f9fbff);
             padding: 20px;
             border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.03);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             display: flex;
             align-items: center;
             transition: transform 0.3s;
         }
-        
+
         .highlight-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 82, 204, 0.1);
@@ -297,9 +320,16 @@
             margin-right: 15px;
             flex-shrink: 0;
         }
-        
-        .h-green .highlight-icon { background: rgba(0, 184, 148, 0.1); color: var(--accent-green); }
-        .h-purple .highlight-icon { background: rgba(108, 92, 231, 0.1); color: #6c5ce7; }
+
+        .h-green .highlight-icon {
+            background: rgba(0, 184, 148, 0.1);
+            color: var(--accent-green);
+        }
+
+        .h-purple .highlight-icon {
+            background: rgba(108, 92, 231, 0.1);
+            color: #6c5ce7;
+        }
 
         .highlight-content h4 {
             font-size: 1.1rem;
@@ -307,7 +337,7 @@
             margin-bottom: 4px;
             color: #2d3436;
         }
-        
+
         .highlight-content p {
             font-size: 0.85rem;
             color: #888;
@@ -332,7 +362,10 @@
 
         .hero-content-overlay {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -340,7 +373,7 @@
             text-align: center;
             color: white;
             padding: 40px;
-            background: linear-gradient(to bottom, rgba(0,20,60,0.1) 0%, rgba(0, 30, 90, 0.6) 100%);
+            background: linear-gradient(to bottom, rgba(0, 20, 60, 0.1) 0%, rgba(0, 30, 90, 0.6) 100%);
         }
 
         .hero-content-overlay .prefix {
@@ -355,7 +388,7 @@
             border-radius: 50px;
             color: #fff;
             text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .hero-content-overlay .main-title {
@@ -366,7 +399,7 @@
             letter-spacing: 10px;
             text-indent: 10px;
             color: #ffffff;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.2), 0 0 50px rgba(0, 82, 204, 0.5);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 82, 204, 0.5);
         }
 
         .hero-content-overlay .sub-title {
@@ -378,9 +411,23 @@
         }
 
         @media (max-width: 600px) {
-            .hero-content-overlay .main-title { font-size: 3.5rem; letter-spacing: 4px; text-indent: 4px; }
-            .hero-content-overlay .prefix { font-size: 1rem; padding: 8px 20px; margin-bottom: 15px; letter-spacing: 1px;}
-            .hero-content-overlay .sub-title { font-size: 1.2rem; letter-spacing: 3px; }
+            .hero-content-overlay .main-title {
+                font-size: 3.5rem;
+                letter-spacing: 4px;
+                text-indent: 4px;
+            }
+
+            .hero-content-overlay .prefix {
+                font-size: 1rem;
+                padding: 8px 20px;
+                margin-bottom: 15px;
+                letter-spacing: 1px;
+            }
+
+            .hero-content-overlay .sub-title {
+                font-size: 1.2rem;
+                letter-spacing: 3px;
+            }
         }
 
         .grid {
@@ -398,6 +445,7 @@
             font-weight: 800;
             color: #2d3436;
         }
+
         .group-header::before {
             content: '';
             display: inline-block;
@@ -423,12 +471,12 @@
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.07), 0 5px 15px -5px rgba(0,0,0,0.03);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.07), 0 5px 15px -5px rgba(0, 0, 0, 0.03);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: row;
             min-height: 200px;
-            border: 1px solid rgba(255,255,255,0.8);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         .member-card:hover {
@@ -442,14 +490,18 @@
             background-color: #f0f2f5;
             position: relative;
             overflow: hidden;
-            box-shadow: inset -5px 0 15px -5px rgba(0,0,0,0.1);
+            box-shadow: inset -5px 0 15px -5px rgba(0, 0, 0, 0.1);
         }
 
         .member-photo-box img {
-            width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            display: block;
             transition: transform 0.5s ease;
         }
-        
+
         .member-card:hover .member-photo-box img {
             transform: scale(1.08);
         }
@@ -462,9 +514,9 @@
             justify-content: center;
             position: relative;
             background: linear-gradient(135deg, #ffffff 0%, #f4f9ff 50%, #e8f2ff 100%);
-            border-top: 1px solid rgba(255,255,255,0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
         }
-        
+
         .member-card:hover .member-info {
             background: linear-gradient(135deg, #ffffff 0%, #edf6ff 50%, #ddeeff 100%);
         }
@@ -476,32 +528,47 @@
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid transparent;
-            border-image: linear-gradient(to right, rgba(0,82,204,0.15), transparent) 1;
+            border-image: linear-gradient(to right, rgba(0, 82, 204, 0.15), transparent) 1;
             position: relative;
         }
 
-        .member-name { 
-            font-size: 1.4rem; 
-            font-weight: 800; 
-            color: #2d3436; 
+        .member-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #2d3436;
             letter-spacing: -0.5px;
         }
 
         .role-badge {
-            font-size: 0.8rem; 
-            padding: 6px 14px; 
+            font-size: 0.8rem;
+            padding: 6px 14px;
             border-radius: 8px;
-            font-weight: 700; 
-            color: #fff; 
-            background-color: #b2bec3; 
+            font-weight: 700;
+            color: #fff;
+            background-color: #b2bec3;
             white-space: nowrap;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        .role-teacher { background: linear-gradient(135deg, #6c5ce7, #8e7cf7); box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);}
-        .role-captain { background: linear-gradient(135deg, #d63031, #ff5e57); box-shadow: 0 4px 12px rgba(214, 48, 49, 0.3);}
-        .role-vice { background: linear-gradient(135deg, #e17055, #ff9f43); box-shadow: 0 4px 12px rgba(225, 112, 85, 0.3);}
-        .role-member { display: none; }
+
+        .role-teacher {
+            background: linear-gradient(135deg, #6c5ce7, #8e7cf7);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+        }
+
+        .role-captain {
+            background: linear-gradient(135deg, #d63031, #ff5e57);
+            box-shadow: 0 4px 12px rgba(214, 48, 49, 0.3);
+        }
+
+        .role-vice {
+            background: linear-gradient(135deg, #e17055, #ff9f43);
+            box-shadow: 0 4px 12px rgba(225, 112, 85, 0.3);
+        }
+
+        .role-member {
+            display: none;
+        }
 
         .member-desc {
             font-size: 1rem;
@@ -515,7 +582,7 @@
         .schedule-box {
             margin-top: 40px;
         }
-        
+
         .schedule-title {
             font-size: 1.5rem;
             font-weight: 800;
@@ -534,8 +601,8 @@
             background: #fff;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.03);
             transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -558,7 +625,7 @@
             margin-bottom: 12px;
             display: inline-block;
         }
-        
+
         .schedule-card.transit .date-tag {
             background: rgba(0, 184, 148, 0.1);
             color: var(--accent-green);
@@ -573,7 +640,7 @@
             position: relative;
             padding-left: 12px;
         }
-        
+
         .schedule-item::before {
             content: '•';
             position: absolute;
@@ -596,7 +663,7 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(0,0,0,0.03);
+            border: 1px solid rgba(0, 0, 0, 0.03);
             height: 100%;
             text-decoration: none;
             color: inherit;
@@ -616,12 +683,15 @@
         }
 
         .article-cover img {
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: transform 0.5s ease;
         }
-        .article-card:hover .article-cover img { transform: scale(1.05); }
+
+        .article-card:hover .article-cover img {
+            transform: scale(1.05);
+        }
 
         .article-content {
             padding: 25px;
@@ -632,18 +702,32 @@
         }
 
         .article-meta {
-            font-size: 0.9rem; color: #888; margin-bottom: 0; display: flex; align-items: center; font-weight: 500;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
         }
+
         .article-meta::before {
-            content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px rgba(0, 184, 148, 0.4);
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 8px rgba(0, 184, 148, 0.4);
         }
 
         .article-title {
-            font-size: 1.35rem; /* 标题字号稍微加大一点，匹配大卡片 */
-            font-weight: 800; 
-            color: #2d3436; 
-            margin-bottom: 15px; 
-            line-height: 1.4; 
+            font-size: 1.35rem;
+            /* 标题字号稍微加大一点，匹配大卡片 */
+            font-weight: 800;
+            color: #2d3436;
+            margin-bottom: 15px;
+            line-height: 1.4;
             letter-spacing: -0.5px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -653,47 +737,101 @@
         }
 
         .read-btn {
-            margin-top: auto; align-self: flex-start; padding: 12px 28px; /* 按钮也稍微大一点 */
-            background-color: rgba(0, 82, 204, 0.08); color: var(--primary-blue); text-decoration: none; border-radius: 30px; font-size: 1rem; font-weight: 700; transition: all 0.3s ease;
+            margin-top: auto;
+            align-self: flex-start;
+            padding: 12px 28px;
+            /* 按钮也稍微大一点 */
+            background-color: rgba(0, 82, 204, 0.08);
+            color: var(--primary-blue);
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
         }
-        .read-btn:hover { background-color: var(--primary-blue); color: white; box-shadow: 0 5px 15px rgba(0, 82, 204, 0.3); transform: translateY(-2px);}
-        
+
+        .read-btn:hover {
+            background-color: var(--primary-blue);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 82, 204, 0.3);
+            transform: translateY(-2px);
+        }
+
         /* 针对手机屏幕的适配 */
         @media (max-width: 600px) {
-            .member-grid { grid-template-columns: 1fr; gap: 25px; }
-            .member-card { flex-direction: column; min-height: auto; }
-            .member-photo-box { width: 100%; height: 240px; box-shadow: inset 0 -10px 20px -10px rgba(0,0,0,0.1); }
-            .member-info { padding: 25px; background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); }
-            .member-card:hover { transform: translateY(-5px); }
-            .member-photo-box img.special-crop-top { object-position: top center !important; }
-
-            .articles-grid { grid-template-columns: 1fr; }
-            
-            /* === 核心修复：防止封面图裁剪 === */
-            .article-cover { 
-                height: auto !important; 
-                aspect-ratio: unset !important; 
-            } 
-            .article-cover img { 
-                width: 100%; 
-                height: auto !important; 
-                object-fit: contain; 
-                display: block; 
+            .member-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
 
-            .hero-banner-container { max-height: 260px; }
-            
-            .mission-card { padding: 25px; }
-            .mission-title { font-size: 1.3rem; }
-            .highlights-grid { grid-template-columns: 1fr; }
-            .schedule-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .member-card {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .member-photo-box {
+                width: 100%;
+                height: 240px;
+                box-shadow: inset 0 -10px 20px -10px rgba(0, 0, 0, 0.1);
+            }
+
+            .member-info {
+                padding: 25px;
+                background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+            }
+
+            .member-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .member-photo-box img.special-crop-top {
+                object-position: top center !important;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* === 核心修复：防止封面图裁剪 === */
+            .article-cover {
+                height: auto !important;
+                aspect-ratio: unset !important;
+            }
+
+            .article-cover img {
+                width: 100%;
+                height: auto !important;
+                object-fit: contain;
+                display: block;
+            }
+
+            .hero-banner-container {
+                max-height: 260px;
+            }
+
+            .mission-card {
+                padding: 25px;
+            }
+
+            .mission-title {
+                font-size: 1.3rem;
+            }
+
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
         }
-        
+
         footer {
-            text-align: center; 
-            padding: 40px 20px; 
-            color: #b2bec3; 
-            font-size: 0.9rem; 
+            text-align: center;
+            padding: 40px 20px;
+            color: #b2bec3;
+            font-size: 0.9rem;
             font-weight: 500;
             width: 100%;
             margin-top: auto;
@@ -752,15 +890,17 @@
                 <h1>实践简介</h1>
                 <div class="line"></div>
             </div>
-            
+
             <div class="mission-card">
                 <div class="mission-watermark">🚀</div>
-                
+
                 <h3 class="mission-title">实践目标</h3>
                 <p class="mission-text">
-                    本次“源梦双碳·先导计划”赴深圳、香港实践支队，旨在深度调研香港电力行业的<span class="highlight-text">市场化运营模式</span>、<span class="highlight-text">可再生能源技术应用</span>及区域协同发展策略。
+                    本次“源梦双碳·先导计划”赴深圳、香港实践支队，旨在深度调研香港电力行业的<span class="highlight-text">市场化运营模式</span>、<span
+                        class="highlight-text">可再生能源技术应用</span>及区域协同发展策略。
                     <br><br>
-                    支队将重点与港理工、港城大等高校沟通交流，走进中电集团等企业，结合南方电网国际等机构的跨境互联实践，探究<span class="highlight-text">粤港澳大湾区</span>背景下的电网规划、低碳转型路径与技术创新挑战，力求形成兼具学术洞察与实践价值的调研成果。
+                    支队将重点与港理工、港城大等高校沟通交流，走进中电集团等企业，结合南方电网国际等机构的跨境互联实践，探究<span
+                        class="highlight-text">粤港澳大湾区</span>背景下的电网规划、低碳转型路径与技术创新挑战，力求形成兼具学术洞察与实践价值的调研成果。
                 </p>
             </div>
 
@@ -897,7 +1037,9 @@
                 </div>
                 <div class="member-card">
                     <div class="member-photo-box">
-                         <img src="zhengjiheng.png" alt="队员" style="object-position: top center;">
+                        <div class="member-photo-box">
+                            <img src="zhengjiheng.png" alt="队员" style="object-position: center 20%;">
+                        </div>
                     </div>
                     <div class="member-info">
                         <div class="member-header"><span class="member-name">郑霁恒</span></div>
@@ -979,7 +1121,9 @@
             <div class="member-grid">
                 <div class="member-card">
                     <div class="member-photo-box">
-                        <img src="zhongrui.png" alt="副支队长" class="special-crop-top">
+                        <div class="member-photo-box">
+                            <img src="zhongrui.png" alt="副支队长" style="object-position: center 20%;">
+                        </div>
                     </div>
                     <div class="member-info">
                         <div class="member-header">
@@ -1068,9 +1212,9 @@
             document.getElementById(sectionId).classList.add('active');
             // 如果是点击导航项触发的，添加active类；如果是页面加载默认显示的，这里需要判断
             if (event) {
-                 event.currentTarget.classList.add('active');
+                event.currentTarget.classList.add('active');
             }
-            
+
 
             window.scrollTo(0, 0);
         }
