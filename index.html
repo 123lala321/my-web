@@ -9,6 +9,7 @@
         :root {
             --primary-blue: #0052cc;
             --accent-green: #00b894;
+            /* 背景稍微灰一点点，让白卡片更突出 */
             --bg-color: #f5f7fa;
             --card-bg: #ffffff;
         }
@@ -24,16 +25,20 @@
             background-color: var(--bg-color);
             color: #2d3436;
             line-height: 1.6;
+            /* 优化文字渲染，使其在深色背景下更清晰 */
             -webkit-font-smoothing: antialiased;
+            /* 让 Body 变成弹性盒子，撑满全屏 */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
+        /* 顶部导航栏 */
         header {
             position: fixed;
             top: 0;
             width: 100%;
+            /* 移除固定高度，改为自动高度 */
             height: auto;
             min-height: 70px;
             background: rgba(255, 255, 255, 0.95);
@@ -45,6 +50,7 @@
             padding: 10px 5%;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
             z-index: 1000;
+            /* 允许内容换行 */
             flex-wrap: wrap;
         }
 
@@ -68,6 +74,7 @@
         nav ul {
             display: flex;
             list-style: none;
+            /* 允许导航项自动换行 */
             flex-wrap: wrap;
             gap: 5px;
             justify-content: center;
@@ -96,6 +103,7 @@
             box-shadow: 0 4px 12px rgba(0, 82, 204, 0.3);
         }
 
+        /* 手机端头部适配 */
         @media (max-width: 600px) {
             header {
                 flex-direction: column;
@@ -128,6 +136,7 @@
             }
         }
 
+        /* 主体内容容器 */
         main {
             margin-top: 80px;
             flex: 1;
@@ -135,9 +144,11 @@
             padding: 40px 8%;
         }
 
+        /* 手机端 Main 适配 */
         @media (max-width: 600px) {
             main {
                 margin-top: 150px;
+                /* 关键修改：减小手机端左右边距，让内容（和图片）显得更宽 */
                 padding: 40px 4%;
             }
         }
@@ -163,6 +174,7 @@
             }
         }
 
+        /* 装饰性背景图形 */
         .decor-blob {
             position: absolute;
             border-radius: 50%;
@@ -187,6 +199,7 @@
             background: rgba(0, 184, 148, 0.15);
         }
 
+        /* 模块通用样式 */
         .section-header {
             margin-bottom: 40px;
             text-align: center;
@@ -216,6 +229,7 @@
             margin-bottom: 30px;
         }
 
+        /* 实践目标主卡片 */
         .mission-card {
             background: #fff;
             border-radius: 16px;
@@ -268,6 +282,7 @@
             border-radius: 4px;
         }
 
+        /* 关键亮点小卡片 */
         .highlights-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -329,6 +344,7 @@
             margin: 0;
         }
 
+        /* 首页大图 */
         .hero-banner-container {
             position: relative;
             width: 100%;
@@ -420,6 +436,7 @@
             gap: 25px;
         }
 
+        /* 成员介绍 */
         .group-header {
             margin: 70px 0 30px 0;
             display: flex;
@@ -561,6 +578,7 @@
             font-weight: 400;
         }
 
+        /* 行程安排样式 */
         .schedule-box {
             margin-top: 40px;
         }
@@ -630,14 +648,13 @@
             color: #ccc;
         }
 
-        /* === 推送合集重构：横向双卡片，比例不变，完整呈现封面 === */
+        /* 推送合集样式 */
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            /* 固定两列，宽度自动平分 */
-            gap: 25px;
-            max-width: 1000px;
-            /* 限制最大宽度，避免过大 */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            /* 控制整体宽度 */
             margin: 0 auto;
             /* 居中 */
         }
@@ -658,70 +675,64 @@
         }
 
         .article-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 50px -15px rgba(0, 82, 204, 0.25);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -15px rgba(0, 82, 204, 0.2);
         }
 
-        /* 封面容器：固定高度比例，确保图片完整覆盖不拉伸变形 */
         .article-cover {
             width: 100%;
-            height: auto;
-            /* 取消固定比例 */
-            background-color: #f0f2f5;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: #eee;
         }
 
         .article-cover img {
             width: 100%;
             height: auto;
-            /* 图片原始高度 */
+            /* 高度自动 */
             display: block;
             object-fit: contain;
+            /* 不裁剪 */
         }
 
         .article-card:hover .article-cover img {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         .article-content {
-            padding: 20px 20px 24px;
+            padding: 25px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            background: #ffffff;
+            background: linear-gradient(to bottom, #fff, #fdfdfd);
         }
 
         .article-meta {
-            font-size: 0.85rem;
-            color: #777;
-            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0;
             display: flex;
             align-items: center;
             font-weight: 500;
-            letter-spacing: 0.3px;
         }
 
         .article-meta::before {
             content: '';
             display: inline-block;
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             background: var(--accent-green);
             border-radius: 50%;
-            margin-right: 6px;
+            margin-right: 8px;
+            box-shadow: 0 0 8px rgba(0, 184, 148, 0.4);
         }
 
         .article-title {
-            font-size: 1.2rem;
-            /* 稍微缩小一点以匹配更紧凑的卡片 */
-            font-weight: 750;
-            color: #1e272e;
-            margin-bottom: 16px;
+            font-size: 1.35rem;
+            /* 标题字号稍微加大一点，匹配大卡片 */
+            font-weight: 800;
+            color: #2d3436;
+            margin-bottom: 15px;
             line-height: 1.4;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.5px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             line-clamp: 2;
@@ -729,26 +740,94 @@
             overflow: hidden;
         }
 
-        /* 隐藏之前的meta位置和read-btn，去掉多余干扰 */
-        .article-card .read-btn {
-            display: none;
+        .read-btn {
+            margin-top: auto;
+            align-self: flex-start;
+            padding: 12px 28px;
+            /* 按钮也稍微大一点 */
+            background-color: rgba(0, 82, 204, 0.08);
+            color: var(--primary-blue);
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
         }
 
-        /* 手机适配：两列变一列，封面比例自适应 */
+        .read-btn:hover {
+            background-color: var(--primary-blue);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 82, 204, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* 针对手机屏幕的适配 */
         @media (max-width: 600px) {
+            .member-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .member-card {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .member-photo-box {
+                width: 100%;
+                height: 240px;
+                box-shadow: inset 0 -10px 20px -10px rgba(0, 0, 0, 0.1);
+            }
+
+            .member-info {
+                padding: 25px;
+                background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+            }
+
+            .member-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .member-photo-box img.special-crop-top {
+                object-position: top center !important;
+            }
+
             .articles-grid {
                 grid-template-columns: 1fr;
-                /* 手机单列 */
-                gap: 20px;
             }
 
+            /* === 核心修复：防止封面图裁剪 === */
             .article-cover {
-                aspect-ratio: 16 / 9;
-                /* 保持比例不变 */
+                height: auto !important;
+                aspect-ratio: unset !important;
             }
 
-            .article-title {
-                font-size: 1.2rem;
+            .article-cover img {
+                width: 100%;
+                height: auto !important;
+                object-fit: contain;
+                display: block;
+            }
+
+            .hero-banner-container {
+                max-height: 260px;
+            }
+
+            .mission-card {
+                padding: 25px;
+            }
+
+            .mission-title {
+                font-size: 1.3rem;
+            }
+
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
         }
 
