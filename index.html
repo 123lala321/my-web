@@ -761,7 +761,6 @@
             transform: translateY(-2px);
         }
 
-        /* 针对手机屏幕的适配 */
         @media (max-width: 600px) {
             .member-grid {
                 grid-template-columns: 1fr;
@@ -777,6 +776,11 @@
                 width: 100%;
                 height: 240px;
                 box-shadow: inset 0 -10px 20px -10px rgba(0, 0, 0, 0.1);
+            }
+
+            /* 👇 只影响项梓纭 */
+            .photo-xiang {
+                object-position: center 65%;
             }
 
             .member-info {
@@ -796,7 +800,6 @@
                 grid-template-columns: 1fr;
             }
 
-            /* === 核心修复：防止封面图裁剪 === */
             .article-cover {
                 height: auto !important;
                 aspect-ratio: unset !important;
@@ -821,7 +824,7 @@
                 font-size: 1.3rem;
             }
 
-            .highlights-grid {
+            F .highlights-grid {
                 grid-template-columns: 1fr;
             }
 
