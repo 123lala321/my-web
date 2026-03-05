@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -648,6 +647,127 @@
             color: #ccc;
         }
 
+        /* 调研报告卡片优化样式 */
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .report-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(0, 82, 204, 0.05);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .report-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 82, 204, 0.15);
+            border-color: rgba(0, 82, 204, 0.2);
+        }
+
+        .report-cover-wrapper {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background: #f0f2f5;
+            margin-bottom: 20px;
+        }
+
+        .report-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .report-card:hover .report-cover-img {
+            transform: scale(1.1);
+        }
+
+        .report-cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .report-card:hover .report-cover-overlay {
+            opacity: 1;
+        }
+
+        .report-info-box {
+            padding: 0 10px 10px 10px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .report-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1e272e;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            letter-spacing: -0.3px;
+        }
+
+        .report-desc {
+            font-size: 0.85rem;
+            color: #636e72;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .report-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            padding-top: 12px;
+        }
+
+        .report-tag {
+            background: rgba(0, 82, 204, 0.08);
+            color: var(--primary-blue);
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+        }
+
+        .download-hint {
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .download-hint::before {
+            content: '⬇';
+            margin-right: 4px;
+        }
+
         /* 推送合集样式 */
         .articles-grid {
             display: grid;
@@ -858,6 +978,7 @@
                 <li class="active" onclick="showSection(event, 'home')">首页</li>
                 <li onclick="showSection(event, 'intro')">实践简介</li>
                 <li onclick="showSection(event, 'members')">成员介绍</li>
+                <li onclick="showSection(event, 'reports')">调研报告</li>   
                 <li onclick="showSection(event, 'articles')">推送合集</li>
                 <li onclick="showSection(event, 'gallery')">影像合集</li>
             </ul>
@@ -1160,13 +1281,69 @@
             </div>
         </section>
 
+        <section id="reports" class="content-section">
+            <div class="section-header">
+                <h1>调研报告</h1>
+                <div class="line"></div>
+                <p style="color: #666; max-width: 650px; margin: 0 auto; font-size: 1.1rem;">
+                    支队阶段性成果，点击卡片即可阅览。
+                </p>
+            </div>
+
+            <div class="reports-grid">
+                <a href="reports/基于深港两城互联的香港地区低碳能源转型路径探索.pdf" target="_blank" class="report-card">
+                    <div class="report-cover-wrapper">
+                        <img src="reports/picture1.png" alt="报告封面" class="report-cover-img">
+                        <div class="report-cover-overlay"></div>
+                    </div>
+                    <div class="report-info-box">
+                        <h3 class="report-title">立足“双城互联”，实现“双轮驱动”</h3>
+                        <div class="report-desc">基于深港两城互联的香港地区低碳能源转型路径探索</div>
+                        <div class="report-footer">
+                            <span class="report-tag">PDF 879 KB</span>
+                            <span class="download-hint">点击预览</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="reports/跨境电力协同治理调研.pdf" target="_blank" class="report-card">
+                    <div class="report-cover-wrapper">
+                        <img src="reports/picture2.png" alt="报告封面" class="report-cover-img">
+                        <div class="report-cover-overlay"></div>
+                    </div>
+                    <div class="report-info-box">
+                        <h3 class="report-title">跨境电力系统的协同机制与能源治理模式调研报告</h3>
+                        <div class="report-desc">探讨粤港澳大湾区能源治理新格局</div>
+                        <div class="report-footer">
+                            <span class="report-tag">PDF 309 KB</span>
+                            <span class="download-hint">点击预览</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="reports/研学协同的双城人才培养互联模式调研.pdf" target="_blank" class="report-card">
+                    <div class="report-cover-wrapper">
+                        <img src="reports/picture3.png" alt="报告封面" class="report-cover-img">
+                        <div class="report-cover-overlay"></div>
+                    </div>
+                    <div class="report-info-box">
+                        <h3 class="report-title">深港双城研学协同：电力人才培养互联模式</h3>
+                        <div class="report-desc">能源转型背景下的双城教育与人才发展</div>
+                        <div class="report-footer">
+                            <span class="report-tag">PDF 378 KB</span>
+                            <span class="download-hint">点击预览</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
         <section id="articles" class="content-section">
             <div class="section-header">
                 <h1>推送合集</h1>
                 <div class="line"></div>
             </div>
 
-            <!-- 横向双卡片排列，比例一致，封面完整呈现 -->
             <div class="articles-grid">
                 <a href="https://mp.weixin.qq.com/s/WJSFgsm6Zkz4wn4b_gNd6Q" target="_blank" class="article-card">
                     <div class="article-cover">
@@ -1187,6 +1364,16 @@
                         <h3 class="article-title">点亮深港丨智汇深港，学启新程</h3>
                     </div>
                 </a>
+
+                <a href="https://mp.weixin.qq.com/s/8gemeQeAIZIE1HvaC6i8FA" target="_blank" class="article-card">
+                    <div class="article-cover">
+                        <img src="tuisong1.png?v=2" alt="封面图">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">2026-03-02</div>
+                        <h3 class="article-title">点亮深港 | 双城互联，共筑未来</h3>
+                    </div>
+                </a>
             </div>
         </section>
 
@@ -1204,7 +1391,6 @@
                     📷 影像占位</div>
             </div>
         </section>
-
     </main>
 
     <footer>
@@ -1227,5 +1413,4 @@
         }
     </script>
 </body>
-
 </html>
