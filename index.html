@@ -135,37 +135,7 @@
                 border: 1px solid var(--primary-blue);
             }
 
-            .hero-content-overlay .prefix {
-                font-size: 0.85rem;
-                /* 从 1rem 调小 */
-                padding: 6px 16px;
-                /* 缩小边距 */
-                margin-bottom: 8px;
-                /* 缩小下方间距，让内容更紧凑 */
-                letter-spacing: 1px;
-            }
-
-            .hero-content-overlay .main-title {
-                font-size: 2.6rem;
-                /* 从 3.5rem 调小到 2.6rem */
-                letter-spacing: 2px;
-                /* 缩小字间距 */
-                text-indent: 2px;
-                line-height: 1.1;
-                /* 强制设置紧凑的行高 */
-                margin: 0;
-                /* 清除默认边距 */
-            }
-
-            .hero-content-overlay .sub-title {
-                font-size: 1rem;
-                /* 从 1.2rem 调小 */
-                letter-spacing: 2px;
-                /* 缩小字间距 */
-                margin-top: 10px;
-                /* 缩小与标题之间的上方间距 */
-                opacity: 0.9;
-            }
+            
         }
 
         /* 主体内容容器 */
@@ -443,22 +413,36 @@
         }
 
         @media (max-width: 600px) {
-            .hero-content-overlay .main-title {
-                font-size: 3.5rem;
-                letter-spacing: 4px;
-                text-indent: 4px;
-            }
-
-            .hero-content-overlay .prefix {
-                font-size: 1rem;
-                padding: 8px 20px;
-                margin-bottom: 15px;
+           .hero-content-overlay .prefix {
+                font-size: 0.85rem;
+                /* 从 1rem 调小 */
+                padding: 6px 16px;
+                /* 缩小边距 */
+                margin-bottom: 8px;
+                /* 缩小下方间距，让内容更紧凑 */
                 letter-spacing: 1px;
             }
 
+            .hero-content-overlay .main-title {
+                font-size: 2.6rem;
+                /* 从 3.5rem 调小到 2.6rem */
+                letter-spacing: 2px;
+                /* 缩小字间距 */
+                text-indent: 2px;
+                line-height: 1.1;
+                /* 强制设置紧凑的行高 */
+                margin: 0;
+                /* 清除默认边距 */
+            }
+
             .hero-content-overlay .sub-title {
-                font-size: 1.2rem;
-                letter-spacing: 3px;
+                font-size: 1rem;
+                /* 从 1.2rem 调小 */
+                letter-spacing: 2px;
+                /* 缩小字间距 */
+                margin-top: 10px;
+                /* 缩小与标题之间的上方间距 */
+                opacity: 0.9;
             }
         }
 
