@@ -135,7 +135,7 @@
                 border: 1px solid var(--primary-blue);
             }
 
-            
+
         }
 
         /* 主体内容容器 */
@@ -413,7 +413,7 @@
         }
 
         @media (max-width: 600px) {
-           .hero-content-overlay .prefix {
+            .hero-content-overlay .prefix {
                 font-size: 0.85rem;
                 /* 从 1rem 调小 */
                 padding: 6px 16px;
@@ -933,6 +933,119 @@
         .gallery-item:hover img {
             filter: brightness(0.9);
             /* 悬停微暗提示可点 */
+        }
+
+        /* --- 视频回顾布局：确保体量适中且居中 --- */
+        .video-grid {
+            display: grid;
+            /* 这里的 500px 控制了卡片的最大宽度，你可以根据需要微调 */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+            gap: 20px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        .video-card {
+            position: relative;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: auto;
+            /* 高度完全由内部图片撑开 */
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 82, 204, 0.2);
+        }
+
+        .video-card img {
+            width: 100%;
+            /* 宽度占满卡片 */
+            height: auto;
+            /* 关键：高度根据图片原始比例自适应，不强制 16:9 */
+            display: block;
+            /* 确保图片哪怕比例再奇怪也会完整显示 */
+            object-fit: contain;
+            /* 如果封面图两边有留白，可以用黑色背景增加电影感，或者改为白色 */
+            background-color: #f0f2f5;
+        }
+
+        /* 播放按钮遮罩：确保按钮始终在图片正中间 */
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.15);
+            /* 稍微降低遮罩亮度，让封面文字更清晰 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .video-card:hover .play-overlay {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-icon::after {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 18px;
+            border-left: 18px solid var(--primary-blue);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+
+        .video-info {
+            padding: 15px 20px;
+            background: #fff;
+            /* 确保文字区域有纯白背景，不遮挡图片 */
+        }
+
+        #videoPlayerOverlay video {
+            width: 90%;
+            /* 宽度占屏幕 90% */
+            max-width: 1000px;
+            /* 最大宽度限制，防止电脑端太巨大 */
+            max-height: 80vh;
+            /* 最大高度限制在屏幕高度的 80% */
+            border-radius: 12px;
+            background-color: #000;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            outline: none;
+            /* 移除点击时的外框线 */
+        }
+
+        /* 修正关闭按钮：确保在视频弹窗中能被看见 */
+        #videoPlayerOverlay .close-viewer {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            z-index: 5001;
+            /* 确保在视频之上 */
+            font-size: 50px;
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        #videoPlayerOverlay .close-viewer:hover {
+            opacity: 1;
         }
 
         /* 响应式调整：屏幕越小，列数越少 */
@@ -1535,8 +1648,7 @@
                     </div>
                 </a>
 
-                <a href="https://mp.weixin.qq.com/s/eBMxO44k5gCMrYc-pza-Sw" target="_blank"
-                    class="article-card">
+                <a href="https://mp.weixin.qq.com/s/eBMxO44k5gCMrYc-pza-Sw" target="_blank" class="article-card">
                     <div class="article-cover">
                         <img src="tuisong1.png?v=2" alt="封面图">
                     </div>
@@ -1552,7 +1664,32 @@
             <div class="section-header">
                 <h1>影像合集</h1>
                 <div class="line"></div>
-                <p style="color: #666; font-size: 1rem; margin-top: -10px;">点击图片可放大查看</p>
+            </div>
+
+            <div style="margin-bottom: 50px;">
+                <h3 style="margin-bottom: 20px; display: flex; align-items: center; font-weight: 800; color: #2d3436;">
+                    <span style="margin-right: 10px;">🎬</span> 实践总结视频
+                </h3>
+                <div class="video-grid">
+                    <div class="video-card" onclick="openVideoPlayer('pictures/video.mp4')">
+                        <img src="image_3.png" alt="视频封面">
+                        <div class="play-overlay">
+                            <div class="play-icon"></div>
+                        </div>
+                        <div class="video-info">
+                            <h4>点亮深港 · 实践纪实总结</h4>
+                            <p>时长: 03:45</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.05); margin-bottom: 40px;">
+
+            <h3 style="margin-bottom: 20px; display: flex; align-items: center; font-weight: 800; color: #2d3436;">
+                <span style="margin-right: 10px;">📸</span> 精彩瞬间
+            </h3>
+            <p style="color: #666; font-size: 1rem; margin-top: -10px;">点击图片可放大查看</p>
             </div>
 
             <div class="waterfall-grid">
@@ -1676,27 +1813,63 @@
         }
 
         // 图片放大逻辑
-        const viewer = document.getElementById('imageViewer');
-        const fullImg = document.getElementById('fullImage');
-
         function openImageViewer(container) {
+            const viewer = document.getElementById('imageViewer');
+            const fullImg = document.getElementById('fullImage');
             const imgUrl = container.querySelector('img').src;
-            fullImg.src = imgUrl; // 将大图地址设为缩略图地址
+            fullImg.src = imgUrl;
             viewer.classList.add('active');
-            document.body.style.overflow = 'hidden'; // 锁定背景滚动
+            document.body.style.overflow = 'hidden';
         }
 
         function closeImageViewer() {
+            const viewer = document.getElementById('imageViewer');
+            const fullImg = document.getElementById('fullImage');
             viewer.classList.remove('active');
-            document.body.style.overflow = ''; // 恢复滚动
+            document.body.style.overflow = '';
             setTimeout(() => { fullImg.src = ''; }, 300);
         }
 
-        // 按下 ESC 键也可以关闭
+        // --- 视频播放逻辑（已修正变量定义位置） ---
+        function openVideoPlayer(videoUrl) {
+            const videoOverlay = document.getElementById('videoPlayerOverlay');
+            const mainVideo = document.getElementById('mainVideo');
+
+            if (videoOverlay && mainVideo) {
+                mainVideo.src = videoUrl;
+                videoOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                mainVideo.play();
+            }
+        }
+
+        function closeVideoPlayer() {
+            const videoOverlay = document.getElementById('videoPlayerOverlay');
+            const mainVideo = document.getElementById('mainVideo');
+
+            if (videoOverlay && mainVideo) {
+                videoOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                mainVideo.pause();
+                mainVideo.src = "";
+            }
+        }
+
+        // 全局按键逻辑
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeImageViewer();
+            if (e.key === 'Escape') {
+                closeImageViewer();
+                closeVideoPlayer();
+            }
         });
     </script>
+
+    <div id="videoPlayerOverlay" class="image-viewer-overlay" onclick="closeVideoPlayer()">
+        <span class="close-viewer">&times;</span>
+        <video id="mainVideo" controls onclick="event.stopPropagation()">
+            您的浏览器不支持 HTML5 视频。
+        </video>
+    </div>
 </body>
 
 </html>
