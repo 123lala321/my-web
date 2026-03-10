@@ -1546,7 +1546,7 @@
 
             <div class="reports-grid">
 
-                <a href="https://123lala321.github.io/my-web/reports/report1.pdf" target="_blank" class="report-card">
+                <a href="web/viewer.html?file=../reports/report1.pdf" target="_blank" class="report-card">
                     <div class="report-cover-wrapper">
                         <img src="reports/picture1.png" alt="报告封面" class="report-cover-img">
                         <div class="report-cover-overlay"></div>
@@ -1556,13 +1556,12 @@
                         <div class="report-desc">基于深港两城互联的香港地区低碳能源转型路径探索</div>
                         <div class="report-footer">
                             <span class="report-tag">PDF 327 KB</span>
-                            <span class="download-hint">直接在线阅读</span>
+                            <span class="download-hint">点击预览</span>
                         </div>
                     </div>
                 </a>
 
-                <a href="https://123lala321.github.io/my-web/reports/report2.pdf"
-                    target="_blank" class="report-card">
+                <a href="https://123lala321.github.io/my-web/reports/report2.pdf" target="_blank" class="report-card">
                     <div class="report-cover-wrapper">
                         <img src="reports/picture2.png" alt="报告封面" class="report-cover-img">
                         <div class="report-cover-overlay"></div>
@@ -1577,8 +1576,7 @@
                     </div>
                 </a>
 
-                <a href="https://123lala321.github.io/my-web/reports/report3.pdf"
-                    target="_blank" class="report-card">
+                <a href="https://123lala321.github.io/my-web/reports/report3.pdf" target="_blank" class="report-card">
                     <div class="report-cover-wrapper">
                         <img src="reports/picture3.png" alt="报告封面" class="report-cover-img">
                         <div class="report-cover-overlay"></div>
@@ -1850,6 +1848,25 @@
                 mainVideo.src = "";
             }
         }
+        function openPdfViewer(pdfUrl) {
+            const overlay = document.getElementById('pdfViewerOverlay');
+            const iframe = document.getElementById('pdfFrame');
+
+            // 使用开源的 PDF.js 在线查看器，这通常比微软的更兼容微信
+            // 如果你的文件是公开的，这个地址在微信里非常稳
+            iframe.src = 'https://mozilla.github.io/pdf.js/web/viewer.html?file=' + encodeURIComponent(pdfUrl);
+
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePdfViewer() {
+            const overlay = document.getElementById('pdfViewerOverlay');
+            const iframe = document.getElementById('pdfFrame');
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+            iframe.src = '';
+        }
 
         // 全局按键逻辑
         document.addEventListener('keydown', (e) => {
@@ -1865,6 +1882,12 @@
         <video id="mainVideo" controls onclick="event.stopPropagation()">
             您的浏览器不支持 HTML5 视频。
         </video>
+    </div>
+
+    <div id="pdfViewerOverlay" class="image-viewer-overlay" onclick="closePdfViewer()">
+        <span class="close-viewer">&times;</span>
+        <iframe id="pdfFrame" src="" width="90%" height="90%"
+            style="border: none; background: white; border-radius: 8px;"></iframe>
     </div>
 </body>
 
